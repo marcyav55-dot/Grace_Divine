@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grâce Divine Multiservices - Apprenons Plus, Réussissons Ensemble</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#0f172a', // Dark blue
+                        'secondary': '#1e40af', // Blue
+                        'accent': '#fbbf24', // Yellow/Orange
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+    <!-- Top Bar -->
+    <div class="bg-primary text-white py-2 px-4 flex flex-col md:flex-row justify-between items-center text-sm">
+        <div class="flex items-center space-x-2 mb-2 md:mb-0">
+            <i class="fa-solid fa-phone text-accent"></i>
+            <a href="tel:+243998966650" class="hover:text-accent transition">Tél. / WhatsApp : +243 998 966 650</a>
+        </div>
+        <div class="flex space-x-4">
+            <a href="#" class="w-8 h-8 flex items-center justify-center bg-gray-700 rounded-full hover:bg-secondary transition"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="w-8 h-8 flex items-center justify-center bg-gray-700 rounded-full hover:bg-secondary transition"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="w-8 h-8 flex items-center justify-center bg-gray-700 rounded-full hover:bg-secondary transition"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="w-8 h-8 flex items-center justify-center bg-gray-700 rounded-full hover:bg-secondary transition"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="w-8 h-8 flex items-center justify-center bg-gray-700 rounded-full hover:bg-secondary transition"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-primary border-t border-gray-700 sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-primary font-bold text-2xl">G</div>
+                <div>
+                    <h1 class="text-white font-bold text-xl leading-none">GRÂCE DIVINE</h1>
+                    <p class="text-accent text-[10px] uppercase tracking-widest font-semibold">Multiservices</p>
+                    <p class="text-gray-400 text-[10px]">Apprenons Plus, Réussissons Ensemble</p>
+                </div>
+            </div>
+
+            <!-- Desktop Menu -->
+            <ul class="hidden lg:flex space-x-8 text-white font-medium">
+                <li><a href="#" class="hover:text-accent transition">Accueil</a></li>
+                <li><a href="#" class="hover:text-accent transition text-accent">À propos</a></li>
+                <li><a href="#" class="hover:text-accent transition">Services</a></li>
+                <li><a href="#" class="hover:text-accent transition">Boutique</a></li>
+                <li><a href="#" class="hover:text-accent transition">Blog</a></li>
+                <li><a href="#" class="hover:text-accent transition border-2 border-accent px-4 py-2 rounded-md hover:bg-accent hover:text-primary">Contact</a></li>
+            </ul>
+
+            <!-- Mobile Menu Button -->
+            <button class="lg:hidden text-white text-2xl" id="mobile-menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-primary border-t border-gray-700 px-4 py-6 space-y-4">
+            <a href="#" class="block text-white hover:text-accent transition">Accueil</a>
+            <a href="#" class="block text-accent transition">À propos</a>
+            <a href="#" class="block text-white hover:text-accent transition">Services</a>
+            <a href="#" class="block text-white hover:text-accent transition">Boutique</a>
+            <a href="#" class="block text-white hover:text-accent transition">Blog</a>
+            <a href="#" class="block text-white border-2 border-accent px-4 py-2 rounded-md text-center hover:bg-accent hover:text-primary transition">Contact</a>
+        </div>
+    </header>
+
+    <!-- Hero / About Header -->
+    <section class="bg-secondary py-16 px-4">
+        <div class="container mx-auto text-center lg:text-left">
+            <h2 class="text-white text-4xl md:text-6xl font-bold mb-4">À Propos de Grâce Divine</h2>
+            <p class="text-blue-100 text-lg md:text-xl">Apprenons Plus, Réussissons Ensemble</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-16">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            
+            <!-- Left Side: Text Content -->
+            <div>
+                <span class="inline-block bg-blue-100 text-secondary px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wider mb-6">Notre Histoire</span>
+                <h3 class="text-3xl md:text-5xl font-bold text-primary mb-8 leading-tight">Une vision née en 2015, au service de Kolwezi</h3>
+                
+                <div class="space-y-6 text-gray-700 leading-relaxed text-lg">
+                    <p>
+                        Tout commence en <span class="font-bold">2015</span>, lorsque <span class="font-bold text-primary">LUBANGULA Aaron</span>, animé par la volonté de servir sa communauté, fonde <span class="font-bold italic">Maison Grâce Divine</span>.
+                    </p>
+                    <p>
+                        Convaincu que l'eau, le savoir et la technologie sont des piliers essentiels du développement, il se lance avec une triple mission :
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start space-x-3">
+                            <span class="text-2xl mt-1">💧</span>
+                            <span><span class="font-bold">Faciliter l'accès à l'eau potable</span> grâce au forage de puits pour les familles et communautés ;</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <span class="text-2xl mt-1">📚</span>
+                            <span><span class="font-bold">Accompagner les étudiants et finalistes</span> (notamment de l'Université de Kolwezi) dans la rédaction, la correction, l'impression et la reliure de leurs travaux.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Side: Founder Card -->
+            <div class="flex justify-center">
+                <div class="relative group">
+                    <!-- Decorative background -->
+                    <div class="absolute -inset-4 bg-gradient-to-tr from-accent to-secondary rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
+                    
+                    <div class="relative bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="w-40 h-40 bg-gradient-to-br from-secondary to-blue-900 rounded-full flex items-center justify-center text-white text-6xl font-bold mb-6 shadow-xl border-4 border-white">
+                                LA
+                            </div>
+                            <h4 class="text-2xl font-bold text-primary mb-1 uppercase tracking-wide">LUBANGULA Aaron</h4>
+                            <p class="text-accent font-bold uppercase text-sm mb-6">Fondateur & Directeur Général</p>
+                            <div class="h-1 w-20 bg-accent mb-6 rounded-full"></div>
+                            <p class="text-gray-600 italic">
+                                À l'origine de Maison Grâce Divine, fondée en 2015 à Kolwezi.
+                            </p>
+                            <div class="mt-8 flex space-x-4">
+                                <a href="#" class="text-gray-400 hover:text-secondary transition text-xl"><i class="fa-brands fa-linkedin"></i></a>
+                                <a href="#" class="text-gray-400 hover:text-accent transition text-xl"><i class="fa-brands fa-facebook"></i></a>
+                                <a href="#" class="text-gray-400 hover:text-green-500 transition text-xl"><i class="fa-brands fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Blog Section Placeholder (As seen in Image 4) -->
+    <section class="bg-gray-100 py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-3xl font-bold text-primary mb-12">Dernières Actualités</h3>
+            <div class="max-w-2xl mx-auto bg-white p-12 rounded-xl shadow-md">
+                <div class="w-24 h-24 bg-gray-200 mx-auto rounded-lg flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-newspaper text-4xl text-gray-400"></i>
+                </div>
+                <h4 class="text-2xl font-bold mb-4">Articles à venir</h4>
+                <p class="text-gray-600 mb-8">
+                    Les articles seront chargés depuis l'API Django (modèle Article), avec liste paginée et page de détail par slug.
+                </p>
+                <button class="bg-secondary text-white px-8 py-3 rounded-md hover:bg-primary transition font-bold uppercase tracking-wide">Bientôt disponible</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-12 px-4">
+        <div class="container mx-auto grid md:grid-cols-3 gap-12">
+            <div>
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-primary font-bold text-xl">G</div>
+                    <span class="font-bold text-xl uppercase">Grâce Divine</span>
+                </div>
+                <p class="text-gray-400 mb-6">
+                    Une entreprise multidisciplinaire dédiée au service de la communauté de Kolwezi depuis 2015.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div>
+                <h5 class="text-lg font-bold mb-6 border-b-2 border-accent w-fit pr-4">Liens Rapides</h5>
+                <ul class="space-y-4 text-gray-400">
+                    <li><a href="#" class="hover:text-white transition">Accueil</a></li>
+                    <li><a href="#" class="hover:text-white transition">À propos</a></li>
+                    <li><a href="#" class="hover:text-white transition">Services</a></li>
+                    <li><a href="#" class="hover:text-white transition">Blog</a></li>
+                    <li><a href="#" class="hover:text-white transition">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-lg font-bold mb-6 border-b-2 border-accent w-fit pr-4">Contactez-nous</h5>
+                <ul class="space-y-4 text-gray-400">
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-location-dot mt-1 text-accent"></i>
+                        <span>Kolwezi, République Démocratique du Congo</span>
+                    </li>
+                    <li class="flex items-center space-x-3">
+                        <i class="fa-solid fa-phone text-accent"></i>
+                        <span>+243 998 966 650</span>
+                    </li>
+                    <li class="flex items-center space-x-3">
+                        <i class="fa-solid fa-envelope text-accent"></i>
+                        <span>contact@gracedivine.com</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container mx-auto mt-12 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+            <p>&copy; 2026 Grâce Divine Multiservices. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = menuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.replace('fa-xmark', 'fa-bars');
+            } else {
+                icon.classList.replace('fa-bars', 'fa-xmark');
+            }
+        });
+    </script>
+</body>
+</html>
