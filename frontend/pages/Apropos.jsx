@@ -3,8 +3,6 @@ import ServiceCard from "../components/ServiceCard";
 import { CTABanner } from "../components/StatsAndCTA";
 
 // ─── Nos engagements / valeurs ───────────────────────────────────────────
-// Repris des supports de communication (badges "Qualité / Rapidité /
-// Prix abordables / Service fiable" visibles sur les flyers Grâce Divine)
 const VALEURS = [
   { icon: "🏅", title: "Qualité Professionnelle", desc: "Un travail soigné, conforme aux normes académiques et techniques." },
   { icon: "⏱️", title: "Respect des Délais", desc: "Rapidité d'exécution sans jamais sacrifier la qualité." },
@@ -27,26 +25,24 @@ export default function Apropos() {
         </p>
       </div>
 
-      {/* ─── Fondateur + Histoire ───────────────────────────────────────────
-          Grille 2 colonnes : à gauche la carte du fondateur,
-          à droite le texte racontant la création et la mission de l'entreprise. */}
+      {/* ─── Fondateur + Histoire ─────────────────────────────────────────── */}
       <section style={{ padding: "60px 24px", background: "#fff" }}>
         <div style={{
           maxWidth: 1100, margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "minmax(220px, 320px) 1fr",
+          display: "flex",
+          flexWrap: "wrap",
           gap: 40,
           alignItems: "center",
         }}>
           {/* ─── Carte du fondateur ─────────────────────────────────────── */}
           <div style={{
+            flex: "1 1 320px",
             background: "linear-gradient(135deg, #0a1e50, #1d4ed8)",
             borderRadius: 16,
             padding: "40px 24px",
             textAlign: "center",
             boxShadow: "0 10px 40px rgba(10,30,80,0.25)",
           }}>
-            {/* Avatar avec initiales (en attendant une vraie photo) */}
             <div style={{
               width: 110, height: 110, borderRadius: "50%",
               background: "linear-gradient(135deg, #f59e0b, #d97706)",
@@ -69,7 +65,7 @@ export default function Apropos() {
           </div>
 
           {/* ─── Texte de présentation / histoire ─────────────────────────── */}
-          <div>
+          <div style={{ flex: "2 1 400px" }}>
             <span style={{
               display: "inline-block",
               background: "#eff6ff", color: "#1d4ed8",
