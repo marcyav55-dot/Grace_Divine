@@ -3,7 +3,7 @@
 ## État actuel du projet
 - **Architecture** : Django + Django REST Framework + Supabase (PostgreSQL).
 - **Structure** : Modulaire, divisée en apps (`accounts`, `services`, `orders`, `content`, `notifications`).
-- **Phase active** : Phase 3 (Modélisation terminée).
+- **Phase active** : Phase 4 (Migrations terminées).
 
 ## Modèles principaux créés
 - `accounts.User` : Extension de l'utilisateur avec rôles (Client, Vendeur, Employé, Admin).
@@ -12,9 +12,8 @@
 - `orders.Order` : Système de suivi des commandes.
 
 ## Prochaines étapes obligatoires
-1. **Migrations** : Exécuter `python manage.py makemigrations` et `migrate`.
-2. **Authentification** : Implémenter les vues et sérialiseurs dans `apps.accounts`.
-3. **API** : Créer les ViewSets pour les services et le slider.
+1. **API** : Créer les ViewSets pour les services et le slider.
+2. **Authentification** : Finaliser les vues et sérialiseurs dans `apps.accounts`.
 
 ## Consignes pour le prochain modèle
 - Respectez la structure modulaire actuelle.
