@@ -99,6 +99,8 @@ curl http://localhost:8000/api/orders/
 
 ## 📖 Documentation Technique
 
+- Rapport détaillé Frontend/Backend : `doc/rapport_frontend_backend.md`
+
 ### Fichiers Importants
 - `Grace_Divine/gemini.md` : Documentation complète du projet
 - `Grace_Divine/backend/settings.py` : Configuration Django

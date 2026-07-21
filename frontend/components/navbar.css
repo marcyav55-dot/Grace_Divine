@@ -2,8 +2,41 @@
    Styles pour la Navbar – compatibles avec le composant React actuel
    ────────────────────────────────────────────────────────────────────────────── */
 
+/* === Variables de thème === */
+:root {
+  --navbar-bg-dark: rgba(10,30,80,0.85);
+  --navbar-bg-dark-scroll: rgba(10,30,80,0.97);
+  --navbar-bg-light: rgba(235,245,255,0.85);
+  --navbar-bg-light-scroll: rgba(235,245,255,0.97);
+  --text-primary-dark: #fff;
+  --text-primary-light: #1a202c;
+  --text-secondary-dark: #cbd5e1;
+  --text-secondary-light: #4a5568;
+  --accent-orange: #f59e0b;
+  --accent-orange-hover: #d97706;
+  --border-light-dark: rgba(255,255,255,0.08);
+  --border-light-light: rgba(0,0,0,0.08);
+}
+
+
 /* Classes utilitaires globales */
 * { box-sizing: border-box; }
+
+/* === Barre de navigation principale === */
+
+/* Thème clair pour la navbar */
+.navbar.light {
+  background: var(--navbar-bg-light);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 20px rgba(255,255,255,0.2);
+}
+
+/* Quand on a scrollé en thème clair */
+.navbar.light.scrolled {
+  background: var(--navbar-bg-light-scroll);
+  box-shadow: 0 4px 20px rgba(255,255,255,0.4);
+}
 
 /* === Barre de navigation principale === */
 .navbar {
@@ -12,7 +45,7 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(10,30,80,0.85);
+  background: var(--navbar-bg-dark);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   box-shadow: 0 2px 20px rgba(0,0,0,0.2);
@@ -57,7 +90,7 @@
   align-items: center;
   gap: 0.75rem;
   text-decoration: none;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .nav-logo {
@@ -69,7 +102,7 @@
   align-items: center;
   justify-content: center;
   font-weight: 900;
-  color: #fff;
+  color: var(--text-primary);
   font-size: 1.125rem;
 }
 
@@ -77,7 +110,7 @@
   margin: 0;
   font-size: 1.125rem;
   font-weight: 800;
-  color: #fff;
+  color: var(--text-primary);
   letter-spacing: 0.5px;
 }
 
@@ -120,7 +153,7 @@
 
 .nav-link:hover,
 .nav-link:focus {
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .nav-link.active {
@@ -129,12 +162,92 @@
   border-bottom-color: #f59e0b;
 }
 
+/* === Bouton thème et menu mobile === */
+
+/* Bouton de thème */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border-light-dark);
+  border-radius: 20px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--text-primary);
+  margin-right: 0.5rem;
+}
+
+.theme-toggle:hover {
+  background: var(--border-light-dark);
+  transform: scale(1.05);
+}
+
+.theme-toggle.dark {
+  border-color: var(--border-light-light);
+}
+
+.theme-toggle.light {
+  background: var(--border-light-light);
+  border-color: var(--border-light-dark);
+}
+
+/* Conteneur des actions (thème + menu) */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* === Bouton thème et menu mobile === */
+
+/* Bouton de thème */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border-light-dark);
+  border-radius: 20px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--text-primary);
+  margin-right: 0.5rem;
+}
+
+.theme-toggle:hover {
+  background: var(--border-light-dark);
+  transform: scale(1.05);
+}
+
+.theme-toggle.dark {
+  border-color: var(--border-light-light);
+}
+
+.theme-toggle.light {
+  background: var(--border-light-light);
+  border-color: var(--border-light-dark);
+}
+
+/* Conteneur des actions (thème + menu) */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 /* === Bouton menu mobile === */
 .mobile-menu-btn {
   background: none;
   border: 1px solid rgba(255,255,255,0.3);
   border-radius: 6px;
-  color: #fff;
+  color: var(--text-primary);
   padding: 0.5rem 0.75rem;
   cursor: pointer;
   font-size: 1.5rem;

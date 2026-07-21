@@ -1,16 +1,45 @@
 import { useSearchParams } from "react-router-dom";
-import { SERVICES } from "../data/siteData";
+import { useState, useEffect } from "react";
+import { api } from "../services/api"; // Import du service API
 
 // ─── Page Boutique ("/boutique") ──────────────────────────────────────────
-// Pour l'instant : page d'attente (placeholder).
-// useSearchParams() lit les paramètres après le "?" dans l'URL.
-// Exemple : /boutique?cat=habillement -> params.get("cat") = "habillement"
-// (ce lien est généré automatiquement par les boutons "VOIR LA BOUTIQUE"
-//  des cartes de services informatique / habillement)
+// Maintenant connectée à l'API Django pour afficher les produits par catégorie
 export default function Boutique() {
   const [params] = useSearchParams();
   const cat = params.get("cat");
-  const category = SERVICES.find(s => s.slug === cat);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        // Charger tous les produits/services
+        const allItems = await api.getServices();
+        setProducts(allItems);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+    
+    fetchData();
+  }, []);
+
+  // Filtrer par catégorie si paramètre présent
+  const filteredProducts = cat 
+    ? products.filter(p => p.category?.slug === cat || p.slug === cat)
+    : products.filter(p => p.is_service === false);
+
+  if (loading) {
+    return <div>Chargement...</div>;
+  }
+
+  if (error) {
+    return <div>Erreur : {error}</div>;
+  }
 
   return (
     <div style={{ marginTop: 110 }}>
@@ -20,25 +49,36 @@ export default function Boutique() {
           Boutique
         </h1>
         <p style={{ color: "#94a3b8", marginTop: 12, fontSize: 15 }}>
-          {category ? `Catégorie : ${category.title}` : "Informatique & Habillement"}
+          {cat ? `Catégorie : ${cat}` : "Informatique & Habillement - Catalogue connecté à l'API"}
         </p>
       </div>
 
-      {/* ─── Message d'attente (à remplacer par le vrai catalogue) ─────────── */}
-      <section style={{ padding: "80px 24px", background: "#f8fafc", minHeight: "40vh" }}>
-        <div style={{
-          maxWidth: 600, margin: "0 auto", textAlign: "center",
-          background: "#fff", borderRadius: 12, padding: "48px 24px",
-          boxShadow: "0 4px 20px rgba(0,0,0,0.06)",
-        }}>
-          <div style={{ fontSize: 48, marginBottom: 16 }}>🛒</div>
-          <h2 style={{ fontSize: 20, fontWeight: 800, color: "#0f172a", margin: "0 0 12px" }}>
-            Catalogue en cours de préparation
-          </h2>
-          <p style={{ color: "#64748b", fontSize: 14, lineHeight: 1.7 }}>
-            Le catalogue de produits {category ? `pour "${category.title}"` : ""} sera bientôt
-            disponible ici, connecté à l'API Django (catégories, produits, panier et commandes).
-          </p>
+      {/* ─── Liste des produits ──────────────────────────────────────────────── */}
+      <section style={{ padding: "60px 24px", background: "#f8fafc" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          {filteredProducts.length === 0 ? (
+            <div style={{ textAlign: "center", padding: "40px" }}>
+              <div style={{ fontSize: 48, marginBottom: 16 }}>🛒</div>
+              <h2 style={{ fontSize: 20, fontWeight: 800, color: "#0f172a", margin: "0 0 12px" }}>Aucun produit trouvé</h2>
+              <p style={{ color: "#64748b", fontSize: 14 }}>Essayez une autre catégorie ou revenez plus tard.</p>
+            </div>
+          ) : (
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gap: 24,
+            }}>
+              {filteredProducts.map(p => (
+                <div key={p.id} style={{ background: "#fff", borderRadius: 12, overflow: "hidden", boxShadow: "0 4px 20px rgba(0,0,0,0.08)" }}>
+                  <div style={{ padding: "20px", textAlign: "center" }}>
+                    <h3 style={{ fontSize: 16, fontWeight: 700, margin: "0 0 8px" }}>{p.name}</h3>
+                    <p style={{ color: "#64748b", fontSize: 14, margin: "0 0 12px" }}>{p.description}</p>
+                    <p style={{ fontSize: 18, fontWeight: 800, color: "#1d4ed8" }}>{p.price/1000} {p.price % 1000 === 0 ? "USD" : "USD"}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </div>
