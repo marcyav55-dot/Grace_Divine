@@ -3,6 +3,16 @@ import { Link, useLocation } from "react-router-dom";
 import "./navbar.css";
 
 const Navbar = () => {
+  const [theme, setTheme] = React.useState('light');
+  
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
+  
+  React.useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+  
   const location = useLocation();
   const [scrolled, setScrolled] = React.useState(false);
   const [menuOpen, setMenuOpen] = React.useState(false);
@@ -48,6 +58,7 @@ const Navbar = () => {
               <Link
                 to={item.path}
                 className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
+                onClick={() => setMenuOpen(false)}
               >
                 {item.label}
               </Link>
@@ -55,11 +66,21 @@ const Navbar = () => {
           ))}
         </ul>
 
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="mobile-menu-btn"
-        >
-          {menuOpen ? "✕" : "☰"}
+        <div className="nav-actions">
+          <button
+            onClick={toggleTheme}
+            className={`theme-toggle ${theme === 'dark' ? 'dark' : 'light'}`}
+            aria-label="Changer le thème"
+          >
+            {theme === 'dark' ? '🌙' : '☀️'}
+          </button>
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="mobile-menu-btn"
+          >
+            {menuOpen ? "X" : "☰"}
+          </button>
+        </div>
       </div>
 
       {/* Menu mobile déroulant */}
