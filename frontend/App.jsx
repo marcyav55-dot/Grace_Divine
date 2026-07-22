@@ -7,6 +7,7 @@ import Services from "./pages/Services";
 import Boutique from "./pages/Boutique";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
+import Panier from "./pages/Panier";
 
 // ─── Composant racine de l'application ──────────────────────────────────────
 // Structure générale de TOUTES les pages :
@@ -57,6 +58,9 @@ export default function App() {
 
         {/* Contact */}
         <Route path="/contact" element={<Contact />} />
+
+        {/* Panier */}
+        <Route path="/panier" element={<Panier />} />
       </Routes>
 
       {/* Pied de page toujours affiché */}

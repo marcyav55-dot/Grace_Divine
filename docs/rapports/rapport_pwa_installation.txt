@@ -1,0 +1,69 @@
+RAPPORT — Fonctionnalité PWA (Installation du site comme application)
+========================================================================
+
+🎯 OBJECTIF
+
+Permettre aux visiteurs d'installer le site Grâce Divine Multiservices
+comme une application sur leur téléphone/ordinateur (icône sur l'écran
+d'accueil, ouverture en plein écran sans barre de navigateur), via la
+fonctionnalité PWA (Progressive Web App).
+
+✅ CE QUI A ÉTÉ FAIT
+
+1. Diagnostic de la structure existante
+   - Vérification de frontend/index.html (pas de manifest, pas d'icônes)
+   - Vérification de frontend/vite.config.js (config Vite basique, sans
+     plugin PWA)
+   - Découverte d'un dossier public/ à la racine de Grace_Divine (obsolète,
+     contenant un ancien prototype HTML/Tailwind, sans rapport avec le
+     frontend React actuel)
+   - Aucune icône/logo trouvée dans le projet
+
+2. Récupération et traitement du logo
+   - Logo réel "GRACE DIVINE INFORMATIQUE" fourni par l'utilisateur
+     (capture d'écran d'une conversation contenant le logo rond)
+   - Recadrage automatique pour isoler uniquement le cercle du logo,
+     en supprimant :
+     a) le fond noir de la capture d'écran
+     b) les éléments d'interface de chat (barre de réponse, emojis)
+        qui avaient été inclus par erreur lors d'un premier essai
+   - Méthode : détection de la plus grande composante connexe non-noire
+     dans l'image (via scipy.ndimage) pour isoler précisément le logo rond
+
+3. Génération des icônes PWA
+   Fichiers créés à partir du logo nettoyé :
+   - icon-192.png   (192x192, icône standard PWA)
+   - icon-512.png   (512x512, icône haute résolution PWA)
+   - apple-touch-icon.png (180x180, pour iOS/Safari)
+   - favicon.ico    (16/32/48px, icône d'onglet navigateur)
+
+🔴 BLOQUÉ ACTUELLEMENT
+
+Les 4 fichiers d'icônes ont été générés et proposés au téléchargement,
+mais n'ont pas pu être déplacés depuis le dossier Téléchargements du
+téléphone vers le dossier frontend/public/ du projet.
+
+Cause probable : difficulté à déplacer des fichiers entre l'application
+de téléchargement du navigateur et l'environnement de développement
+(Termux/smartIDE) sur Android — permissions de stockage ou chemin
+d'accès au dossier Download non trouvé/accessible.
+
+📋 PROCHAINES ÉTAPES
+
+1. Résoudre le transfert de fichiers :
+   - Vérifier le chemin réel du dossier Téléchargements avec :
+     find /storage -iname "icon-192.png" 2>/dev/null
+     find /sdcard -iname "icon-192.png" 2>/dev/null
+   - Vérifier les permissions de stockage accordées à l'application
+     smartIDE/Termux (Paramètres Android > Applications > permissions)
+   - Alternative : utiliser une commande "termux-setup-storage" si
+     disponible, pour lier /sdcard à l'environnement Termux
+
+2. Une fois les icônes placées dans frontend/public/, reste à faire :
+   - Créer le fichier manifest.json (nom de l'app, icônes, couleurs,
+     mode d'affichage "standalone")
+   - Lier le manifest dans index.html
+   - Ajouter le plugin PWA à vite.config.js (ex: vite-plugin-pwa) pour
+     générer automatiquement le service worker
+   - Tester l'apparition de la bannière/l'option "Installer l'application"
+     dans le navigateur mobile
