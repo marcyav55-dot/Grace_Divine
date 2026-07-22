@@ -1,0 +1,60 @@
+RAPPORT — Projet Grâce Divine Multiservices
+============================================
+
+✅ FRONTEND (React/Vite)
+
+1. Page Panier (pages/Panier.jsx)
+   - Affichage des articles du panier avec quantités ajustables (+/-)
+   - Calcul du total
+   - Bouton "Commander via WhatsApp" (génère un message pré-rempli)
+   - Bouton "Vider le panier"
+
+2. Route /panier ajoutée dans App.jsx
+
+3. Icône panier + badge dans la navbar (components/Navbar.jsx + navbar.css)
+   - Icône panier avec badge rouge indiquant le nombre d'articles
+   - Présente en version desktop et menu mobile
+   - Mise à jour en temps réel via le CartContext
+
+4. Bouton "Ajouter au panier" dans pages/Boutique.jsx
+   - Ajout au panier via addItem() du CartContext
+   - Feedback visuel (bouton devient vert "Ajouté" pendant 1,5s)
+
+5. Diagnostic du bug "Aucun produit trouvé"
+   - Cause identifiée : les 2 seules entrées en base avaient is_service=true,
+     donc filtrées par la Boutique (qui n'affiche que is_service=false)
+
+✅ BACKEND (Django)
+
+1. Produits fictifs ajoutés en base (script shell Django) :
+   - 3 produits Informatique (laptop, souris, clé USB)
+   - 3 produits Habillement (casquette, t-shirt, sac à dos)
+   - Tous marqués "produit test, à remplacer" pour les distinguer plus tard
+
+2. Création de apps/services/admin.py
+   - Enregistrement de Category et Product dans l'admin Django
+   - Aperçu d'image dans la liste des produits
+
+3. Configuration des fichiers médias
+   - Ajout du service des fichiers médias en dev dans core/urls.py
+   - Vérification que MEDIA_URL/MEDIA_ROOT étaient déjà bien configurés
+     dans settings.py
+
+4. Création du compte super-administrateur "Marcus" (réussie)
+
+🔴 BLOQUÉ ACTUELLEMENT
+
+Erreur au chargement de /admin/ :
+zoneinfo._common.ZoneInfoNotFoundError: 'No time zone found with key UTC'
+
+Cause : le module Python tzdata (fuseaux horaires) n'est pas disponible
+dans l'environnement (Termux/smartIDE sur Android). La tentative
+"pip install tzdata" n'a pas encore été confirmée comme résolue.
+
+Prochaine étape à essayer :
+- Relancer précisément : pip install tzdata
+  (ou : python3 -m pip install tzdata)
+- Puis relancer le serveur et retester /admin/
+- Si ça persiste, explorer une autre piste :
+  - Forcer TIME_ZONE = None temporairement dans settings.py
+  - Vérifier la version de Python/pip utilisée

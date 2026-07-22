@@ -1,0 +1,36 @@
+{
+  "name": "Grâce Divine Multiservices",
+  "short_name": "Grâce Divine",
+  "description": "Forage d'eau, assistance académique, informatique et bien plus - Kolwezi, RDC",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a1e50",
+  "theme_color": "#1d4ed8",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

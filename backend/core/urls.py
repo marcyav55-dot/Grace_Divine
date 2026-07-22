@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 # Routage principal du projet Grâce Divine Multiservices
 urlpatterns = [
@@ -12,3 +14,7 @@ urlpatterns = [
     path('api/content/', include('apps.content.urls')),    # Blog, slides et contenus
     path('api/orders/', include('apps.orders.urls')),      # Commandes et paiements
 ]
+
+# Sert les fichiers médias (images uploadées) en développement
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
