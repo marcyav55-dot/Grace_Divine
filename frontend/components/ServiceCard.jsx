@@ -11,7 +11,7 @@ export default function ServiceCard({ service, interactive = true }) {
   const [hovered, setHovered] = useState(false);
 
   // Couleurs spécifiques à ce service (bordure, badge, fond clair)
-  const c = colorMap[service.color];
+  const c = colorMap[service.color] || colorMap.blue;
 
   // Les services "boutique" (informatique / habillement) renvoient vers /boutique,
   // les autres vers leur page /services/:slug
@@ -23,7 +23,7 @@ export default function ServiceCard({ service, interactive = true }) {
       onMouseEnter={() => interactive && setHovered(true)}
       onMouseLeave={() => interactive && setHovered(false)}
       style={{
-        background: "#fff",
+        background: "var(--bg-white)",
         borderRadius: 12,
         overflow: "hidden",
         width: "100%",
@@ -69,10 +69,10 @@ export default function ServiceCard({ service, interactive = true }) {
       {/* ─── Corps : liste des prestations du service ────────────────────── */}
       <div style={{ padding: "16px 20px", flex: 1 }}>
         <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 8 }}>
-          {service.items.map((item, i) => (
+          {(service.items || (service.description ? [service.description] : [])).map((item, i) => (
             <li key={i} style={{
               display: "flex", alignItems: "center", gap: 8,
-              fontSize: 13, color: "#475569",
+              fontSize: 13, color: "var(--text-secondary)",
             }}>
               {/* petite puce ronde colorée */}
               <span style={{

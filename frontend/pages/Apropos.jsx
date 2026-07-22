@@ -26,7 +26,7 @@ export default function Apropos() {
       </div>
 
       {/* ─── Fondateur + Histoire ─────────────────────────────────────────── */}
-      <section style={{ padding: "60px 24px", background: "#fff" }}>
+      <section style={{ padding: "60px 24px", background: "var(--bg-white)" }}>
         <div style={{
           maxWidth: 1100, margin: "0 auto",
           display: "flex",
@@ -75,22 +75,22 @@ export default function Apropos() {
             }}>
               Notre Histoire
             </span>
-            <h2 style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)", fontWeight: 900, color: "#0f172a", margin: "0 0 18px", lineHeight: 1.25 }}>
+            <h2 style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)", fontWeight: 900, color: "var(--text-primary)", margin: "0 0 18px", lineHeight: 1.25 }}>
               Une vision née en {FOUNDER.year}, au service de Kolwezi
             </h2>
-            <p style={{ color: "#475569", fontSize: 15, lineHeight: 1.8, marginBottom: 16 }}>
+            <p style={{ color: "var(--text-secondary)", fontSize: 15, lineHeight: 1.8, marginBottom: 16 }}>
               Tout commence en <strong>{FOUNDER.year}</strong>, lorsque <strong>{FOUNDER.name}</strong>,
               animé par la volonté de servir sa communauté, fonde <strong>Maison Grâce Divine</strong>.
               Convaincu que l'eau, le savoir et la technologie sont des piliers essentiels du
               développement, il se lance avec une triple mission&nbsp;:
             </p>
-            <ul style={{ color: "#475569", fontSize: 15, lineHeight: 1.9, paddingLeft: 20, marginBottom: 16 }}>
+            <ul style={{ color: "var(--text-secondary)", fontSize: 15, lineHeight: 1.9, paddingLeft: 20, marginBottom: 16 }}>
               <li>💧 Faciliter l'accès à l'eau potable grâce au <strong>forage de puits</strong> pour les familles et communautés&nbsp;;</li>
               <li>📚 Accompagner les <strong>étudiants et finalistes</strong> (notamment de l'Université de Kolwezi) dans la
                 rédaction, la correction, l'impression et la reliure de leurs <strong>mémoires, TFC et rapports de stage</strong>&nbsp;;</li>
               <li>💻 Fournir aux particuliers et entreprises du <strong>matériel informatique</strong> de qualité, garanti et au juste prix.</li>
             </ul>
-            <p style={{ color: "#475569", fontSize: 15, lineHeight: 1.8 }}>
+            <p style={{ color: "var(--text-secondary)", fontSize: 15, lineHeight: 1.8 }}>
               Au fil des années, Grâce Divine a élargi son champ d'action — bureautique, réseaux &
               télécommunications, boutique d'habillement — tout en gardant la même devise&nbsp;:
               <em> « Apprenons Plus, Réussissons Ensemble »</em>.
@@ -100,7 +100,7 @@ export default function Apropos() {
       </section>
 
       {/* ─── Nos domaines d'activité (réutilise les cartes SERVICES) ───────── */}
-      <section style={{ padding: "60px 24px", background: "#f8fafc" }}>
+      <section style={{ padding: "60px 24px", background: "var(--bg-light)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 40 }}>
             <span style={{
@@ -112,7 +112,7 @@ export default function Apropos() {
             }}>
               Nos Domaines d'Activité
             </span>
-            <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 2.5rem)", fontWeight: 900, color: "#0f172a", margin: "0 0 16px" }}>
+            <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 2.5rem)", fontWeight: 900, color: "var(--text-primary)", margin: "0 0 16px" }}>
               Une mission, plusieurs domaines
             </h2>
             <div style={{ width: 50, height: 4, background: "linear-gradient(90deg, #1d4ed8, #f59e0b)", borderRadius: 2, margin: "0 auto" }} />
@@ -129,10 +129,10 @@ export default function Apropos() {
       </section>
 
       {/* ─── Pourquoi nous choisir (nos valeurs) ───────────────────────────── */}
-      <section style={{ padding: "60px 24px", background: "#fff" }}>
+      <section style={{ padding: "60px 24px", background: "var(--bg-white)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 40 }}>
-            <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 2.5rem)", fontWeight: 900, color: "#0f172a", margin: "0 0 16px" }}>
+            <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 2.5rem)", fontWeight: 900, color: "var(--text-primary)", margin: "0 0 16px" }}>
               Pourquoi Nous Choisir ?
             </h2>
             <div style={{ width: 50, height: 4, background: "linear-gradient(90deg, #1d4ed8, #f59e0b)", borderRadius: 2, margin: "0 auto" }} />
@@ -146,14 +146,14 @@ export default function Apropos() {
             {VALEURS.map((v, i) => (
               <div key={i} style={{
                 textAlign: "center", padding: "28px 20px",
-                borderRadius: 12, background: "#f8fafc",
+                borderRadius: 12, background: "var(--bg-light)",
                 border: "1px solid #f1f5f9",
               }}>
                 <div style={{ fontSize: 32, marginBottom: 12 }}>{v.icon}</div>
-                <h3 style={{ fontSize: 15, fontWeight: 800, color: "#0f172a", margin: "0 0 8px" }}>
+                <h3 style={{ fontSize: 15, fontWeight: 800, color: "var(--text-primary)", margin: "0 0 8px" }}>
                   {v.title}
                 </h3>
-                <p style={{ fontSize: 13, color: "#64748b", lineHeight: 1.6, margin: 0 }}>
+                <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.6, margin: 0 }}>
                   {v.desc}
                 </p>
               </div>
@@ -163,7 +163,7 @@ export default function Apropos() {
       </section>
 
       {/* ─── Localisation / Contact rapide ─────────────────────────────────── */}
-      <section style={{ padding: "0 24px 60px", background: "#fff" }}>
+      <section style={{ padding: "0 24px 60px", background: "var(--bg-white)" }}>
         <div style={{
           maxWidth: 1100, margin: "0 auto",
           background: "linear-gradient(135deg, #0a1e50, #1d4ed8)",

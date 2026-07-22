@@ -10,6 +10,21 @@ import { useState, useEffect } from "react";
 //  - "/services/:slug"  -> affiche le détail d'UN seul service
 //
 // useParams() lit le ":slug" présent dans l'URL (défini dans App.jsx)
+
+// Transforme un objet service brut de l'API vers la forme attendue par <ServiceCard />
+function mapToCard(s) {
+  return {
+    id: s.id,
+    title: s.name,
+    description: s.description,
+    items: s.description ? [s.description] : [],
+    cta: s.is_service === false ? "VOIR LA BOUTIQUE" : "EN SAVOIR PLUS",
+    slug: s.category?.slug || s.id,
+    icon: s.category?.slug === "web" ? "🌐" : s.category?.slug === "forage" ? "💧" : "🔧",
+    color: s.category?.slug === "web" ? "blue" : s.category?.slug === "forage" ? "cyan" : "amber",
+  };
+}
+
 export default function Services() {
   const { slug } = useParams();
   const [services, setServices] = useState([]);
@@ -23,12 +38,14 @@ export default function Services() {
         setLoading(true);
         // Charger tous les services
         const allServices = await api.getServices();
-        setServices(allServices);
+        setServices(allServices.map(mapToCard));
         
-        // Si un slug est présent, charger le service spécifique
+        // Si un slug est présent, chercher le service correspondant
+        // dans la liste déjà chargée (plus fiable que l'API de recherche)
         if (slug) {
-          const serviceData = await api.getServiceBySlug(slug);
-          setSingleService(serviceData[0] || null);
+          const mapped = allServices.map(mapToCard);
+          const found = mapped.find(s => s.slug === slug);
+          setSingleService(found || null);
         }
         setLoading(false);
       } catch (err) {
@@ -53,7 +70,7 @@ export default function Services() {
       {/* ─── Bandeau de titre ─────────────────────────────────────────────── */}
       <div style={{ background: "linear-gradient(135deg, #0a1e50, #1d4ed8)", padding: "60px 24px", textAlign: "center" }}>
         <h1 style={{ color: "#fff", fontSize: "clamp(1.8rem, 4vw, 2.6rem)", fontWeight: 900, margin: 0 }}>
-          {singleService ? singleService.name : "Nos Services"}
+          {singleService ? singleService.title : "Nos Services"}
         </h1>
         <p style={{ color: "#94a3b8", marginTop: 12, fontSize: 15 }}>
           {singleService ? singleService.description : "Découvrez l'ensemble de nos domaines d'expertise"}
@@ -61,7 +78,7 @@ export default function Services() {
       </div>
 
       {/* ─── Contenu : une carte seule, OU la grille complète ──────────────── */}
-      <section style={{ padding: "60px 24px", background: "#f8fafc" }}>
+      <section style={{ padding: "60px 24px", background: "var(--bg-light)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           {singleService ? (
             // Détail d'un service : une seule carte centrée

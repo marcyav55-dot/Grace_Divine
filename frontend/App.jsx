@@ -18,33 +18,48 @@ import Contact from "./pages/Contact";
 // <BrowserRouter> (dans main.jsx) doit envelopper ce composant pour que
 // <Routes> / <Route> / <NavLink> / <Link> fonctionnent.
 export default function App() {
+  console.log("App rendered");
+
   return (
-    <div style={{ fontFamily: "'Segoe UI', system-ui, -apple-system, sans-serif", minHeight: "100vh" }}>
+    <div
+      style={{
+        fontFamily: "'Segoe UI', system-ui, -apple-system, sans-serif",
+        minHeight: "100vh",
+      }}
+    >
       {/* Petit reset CSS global */}
       <style>{`
         * { box-sizing: border-box; }
         body { margin: 0; }
       `}</style>
 
+      {/* Barre de navigation toujours affichée */}
       <Navbar />
 
       {/* ─── Routage : chaque <Route> associe une URL à une page ────────────── */}
       <Routes>
+        {/* Page d'accueil */}
         <Route path="/" element={<Accueil />} />
 
         {/* Page de présentation du fondateur et de l'histoire de Grâce Divine */}
         <Route path="/a-propos" element={<Apropos />} />
 
         {/* /services           -> liste de tous les services */}
-        {/* /services/:slug     -> détail d'un service précis  */}
+        {/* /services/:slug     -> détail d'un service précis */}
         <Route path="/services" element={<Services />} />
         <Route path="/services/:slug" element={<Services />} />
 
+        {/* Boutique */}
         <Route path="/boutique" element={<Boutique />} />
+
+        {/* Blog */}
         <Route path="/blog" element={<Blog />} />
+
+        {/* Contact */}
         <Route path="/contact" element={<Contact />} />
       </Routes>
 
+      {/* Pied de page toujours affiché */}
       <Footer />
     </div>
   );

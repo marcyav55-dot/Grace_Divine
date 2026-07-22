@@ -13,17 +13,17 @@ export default function Blog() {
         </p>
       </div>
 
-      <section style={{ padding: "80px 24px", background: "#f8fafc", minHeight: "40vh" }}>
+      <section style={{ padding: "80px 24px", background: "var(--bg-light)", minHeight: "40vh" }}>
         <div style={{
           maxWidth: 600, margin: "0 auto", textAlign: "center",
-          background: "#fff", borderRadius: 12, padding: "48px 24px",
+          background: "var(--bg-white)", borderRadius: 12, padding: "48px 24px",
           boxShadow: "0 4px 20px rgba(0,0,0,0.06)",
         }}>
           <div style={{ fontSize: 48, marginBottom: 16 }}>📰</div>
-          <h2 style={{ fontSize: 20, fontWeight: 800, color: "#0f172a", margin: "0 0 12px" }}>
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: "var(--text-primary)", margin: "0 0 12px" }}>
             Articles à venir
           </h2>
-          <p style={{ color: "#64748b", fontSize: 14, lineHeight: 1.7 }}>
+          <p style={{ color: "var(--text-secondary)", fontSize: 14, lineHeight: 1.7 }}>
             Les articles seront chargés depuis l'API Django (modèle <code>Article</code>),
             avec liste paginée et page de détail par <code>slug</code>.
           </p>

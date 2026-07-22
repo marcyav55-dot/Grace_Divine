@@ -136,16 +136,6 @@ a:hover { text-decoration: underline; }
   margin-bottom: 2rem;
 }
 
-/* === Navigation et header === */
-.navbar {
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(10px);
-  padding: 1rem 0;
-  border-bottom: 1px solid #e2e8f0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
 
 .navbar-container {
   max-width: 1200px;
@@ -180,40 +170,6 @@ a:hover { text-decoration: underline; }
   color: var(--primary-blue);
 }
 
-/* === Footer === */
-.footer {
-  background: var(--primary-dark);
-  color: #fff;
-  padding: 3rem 1rem 2rem;
-}
-
-.footer-grid {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
-
-.footer-col h4 {
-  color: var(--accent-orange);
-  margin-bottom: 1rem;
-}
-
-.footer-col p {
-  color: rgba(255,255,255,0.7);
-  margin: 0 0 0.5rem;
-}
-
-.footer-bottom {
-  border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 1.5rem;
-  text-align: center;
-  color: rgba(255,255,255,0.5);
-  font-size: 0.875rem;
-}
-
 /* === Badges et tags === */
 .badge {
   display: inline-block;
@@ -244,4 +200,60 @@ a:hover { text-decoration: underline; }
 @media (max-width: 768px) {
   .section { padding: 3rem 1rem; }
   .nav-links { display: none; }
+}
+
+
+
+
+/* === Thèmes (via data-theme sur <html>) === */
+
+/* Clair : identité actuelle, légèrement réchauffée */
+[data-theme="light"] {
+  --bg-white: #fdfdfc;
+  --bg-light: #f4f6fb;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+}
+
+/* Sombre : bleu nuit profond, surfaces dégradées, accents dorés */
+[data-theme="dark"] {
+  --primary-dark: #12296e;
+  --bg-white: #12296e;
+  --bg-light: #17347d;
+  --text-primary: #f8fafc;
+  --text-secondary: #b8c4e0;
+  --text-light: #7d8db8;
+  --bg-gradient: linear-gradient(135deg, #061436, #12296e);
+}
+
+[data-theme="dark"] body {
+  background: var(--bg-white);
+}
+
+[data-theme="dark"] .card {
+  background: linear-gradient(160deg, #17347d, #12296e);
+  border-color: rgba(245, 158, 11, 0.25);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+[data-theme="dark"] .card:hover {
+  border-color: rgba(245, 158, 11, 0.5);
+}
+
+[data-theme="dark"] .btn-primary {
+  box-shadow: 0 0 0 1px rgba(245,158,11,0.4), 0 4px 14px rgba(245,158,11,0.25);
+}
+
+[data-theme="dark"] .badge-primary {
+  background: rgba(29, 78, 216, 0.25);
+  color: #93c5fd;
+}
+
+/* Navbar : suit le thème */
+[data-theme="dark"] .navbar {
+  background: var(--navbar-bg-dark);
+}
+
+[data-theme="light"] .navbar {
+  background: var(--navbar-bg-light);
 }
