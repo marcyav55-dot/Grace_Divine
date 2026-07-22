@@ -45,7 +45,7 @@ export default function ServiceCarousel() {
 
   return (
     <section
-      style={{ padding: "70px 0 50px", background: "#f8fafc", overflow: "hidden" }}
+      style={{ padding: "70px 0 50px", background: "var(--bg-light)", overflow: "hidden" }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -62,7 +62,7 @@ export default function ServiceCarousel() {
         </span>
         <h2 style={{
           fontSize: "clamp(1.8rem, 4vw, 2.5rem)",
-          fontWeight: 900, color: "#0f172a",
+          fontWeight: 900, color: "var(--text-primary)",
           margin: "0 0 16px", lineHeight: 1.2,
         }}>
           Des Services Complets Pour Vous
@@ -199,7 +199,7 @@ function arrowStyle(side) {
     borderRadius: "50%",
     border: "none",
     background: "rgba(15,23,42,0.08)",
-    color: "#0f172a",
+    color: "var(--text-primary)",
     fontSize: 26,
     fontWeight: 300,
     cursor: "pointer",

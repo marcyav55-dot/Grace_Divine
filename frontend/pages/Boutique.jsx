@@ -54,13 +54,13 @@ export default function Boutique() {
       </div>
 
       {/* ─── Liste des produits ──────────────────────────────────────────────── */}
-      <section style={{ padding: "60px 24px", background: "#f8fafc" }}>
+      <section style={{ padding: "60px 24px", background: "var(--bg-light)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           {filteredProducts.length === 0 ? (
             <div style={{ textAlign: "center", padding: "40px" }}>
               <div style={{ fontSize: 48, marginBottom: 16 }}>🛒</div>
-              <h2 style={{ fontSize: 20, fontWeight: 800, color: "#0f172a", margin: "0 0 12px" }}>Aucun produit trouvé</h2>
-              <p style={{ color: "#64748b", fontSize: 14 }}>Essayez une autre catégorie ou revenez plus tard.</p>
+              <h2 style={{ fontSize: 20, fontWeight: 800, color: "var(--text-primary)", margin: "0 0 12px" }}>Aucun produit trouvé</h2>
+              <p style={{ color: "var(--text-secondary)", fontSize: 14 }}>Essayez une autre catégorie ou revenez plus tard.</p>
             </div>
           ) : (
             <div style={{
@@ -69,10 +69,10 @@ export default function Boutique() {
               gap: 24,
             }}>
               {filteredProducts.map(p => (
-                <div key={p.id} style={{ background: "#fff", borderRadius: 12, overflow: "hidden", boxShadow: "0 4px 20px rgba(0,0,0,0.08)" }}>
+                <div key={p.id} style={{ background: "var(--bg-white)", borderRadius: 12, overflow: "hidden", boxShadow: "0 4px 20px rgba(0,0,0,0.08)" }}>
                   <div style={{ padding: "20px", textAlign: "center" }}>
                     <h3 style={{ fontSize: 16, fontWeight: 700, margin: "0 0 8px" }}>{p.name}</h3>
-                    <p style={{ color: "#64748b", fontSize: 14, margin: "0 0 12px" }}>{p.description}</p>
+                    <p style={{ color: "var(--text-secondary)", fontSize: 14, margin: "0 0 12px" }}>{p.description}</p>
                     <p style={{ fontSize: 18, fontWeight: 800, color: "#1d4ed8" }}>{p.price/1000} {p.price % 1000 === 0 ? "USD" : "USD"}</p>
                   </div>
                 </div>

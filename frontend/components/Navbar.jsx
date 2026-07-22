@@ -33,7 +33,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+    <nav className={`navbar ${theme} ${scrolled ? "scrolled" : ""}`}>
       {/* Barre du haut avec téléphone/WhatsApp */}
       <div className="navbar-top">
         <a href="https://wa.me/243998966650" target="_blank" rel="noopener noreferrer">

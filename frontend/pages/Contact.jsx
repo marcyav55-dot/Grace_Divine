@@ -44,7 +44,7 @@ export default function Contact() {
         </p>
       </div>
 
-      <section style={{ padding: "60px 24px", background: "#f8fafc" }}>
+      <section style={{ padding: "60px 24px", background: "var(--bg-light)" }}>
         {/* Grille 2 colonnes : formulaire + bloc WhatsApp/infos */}
         <div style={{
           maxWidth: 900, margin: "0 auto",
@@ -53,8 +53,8 @@ export default function Contact() {
         }}>
 
           {/* ─── Colonne gauche : formulaire de contact ─────────────────────── */}
-          <div style={{ background: "#fff", borderRadius: 12, padding: 28, boxShadow: "0 4px 20px rgba(0,0,0,0.06)" }}>
-            <h2 style={{ fontSize: 18, fontWeight: 800, color: "#0f172a", margin: "0 0 20px" }}>
+          <div style={{ background: "var(--bg-white)", borderRadius: 12, padding: 28, boxShadow: "0 4px 20px rgba(0,0,0,0.06)" }}>
+            <h2 style={{ fontSize: 18, fontWeight: 800, color: "var(--text-primary)", margin: "0 0 20px" }}>
               Envoyer un message
             </h2>
 
@@ -62,7 +62,7 @@ export default function Contact() {
               // ─── Message affiché après l'envoi ──────────────────────────
               <div style={{ textAlign: "center", padding: "30px 0" }}>
                 <div style={{ fontSize: 40, marginBottom: 12 }}>✅</div>
-                <p style={{ color: "#0f172a", fontWeight: 700 }}>Merci ! Votre message a été enregistré.</p>
+                <p style={{ color: "var(--text-primary)", fontWeight: 700 }}>Merci ! Votre message a été enregistré.</p>
               </div>
             ) : (
               // ─── Formulaire ──────────────────────────────────────────────
@@ -110,12 +110,33 @@ export default function Contact() {
               </div>
             </a>
 
+
+            {/* Carte Appel direct -> lance un appel téléphonique */}
+            <a
+              href="tel:+243808955958"
+              style={{
+                display: "flex", alignItems: "center", gap: 14,
+                background: "linear-gradient(135deg, #1d4ed8, #0a1e50)",
+                color: "#fff", textDecoration: "none",
+                borderRadius: 12, padding: "20px 24px",
+                boxShadow: "0 6px 24px rgba(29,78,216,0.35)",
+              }}
+            >
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24 11.3 11.3 0 0 0 3.54.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.3 11.3 0 0 0 .57 3.54 1 1 0 0 1-.25 1.02z"/>
+              </svg>
+              <div>
+                <div style={{ fontWeight: 800, fontSize: 15 }}>Appel direct</div>
+                <div style={{ fontSize: 13, opacity: 0.9 }}>+243 808 955 958</div>
+              </div>
+            </a>
+
             {/* Bloc informations générales */}
-            <div style={{ background: "#fff", borderRadius: 12, padding: 24, boxShadow: "0 4px 20px rgba(0,0,0,0.06)" }}>
-              <h3 style={{ fontSize: 15, fontWeight: 800, color: "#0f172a", margin: "0 0 16px" }}>
+            <div style={{ background: "var(--bg-white)", borderRadius: 12, padding: 24, boxShadow: "0 4px 20px rgba(0,0,0,0.06)" }}>
+              <h3 style={{ fontSize: 15, fontWeight: 800, color: "var(--text-primary)", margin: "0 0 16px" }}>
                 Informations
               </h3>
-              <div style={{ display: "flex", flexDirection: "column", gap: 12, fontSize: 13, color: "#475569" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 12, fontSize: 13, color: "var(--text-secondary)" }}>
                 <div>📍 République Démocratique du Congo</div>
                 <div>📧 gracedivineinformatique@gmail.com</div>
                 <div>🕐 Lun – Sam : 07h – 19h</div>
