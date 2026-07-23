@@ -2,6 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { api } from "../services/api"; // Import du service API
 import { useCart } from "../context/CartContext";
+import ProductCard from "../components/ProductCard";
 
 // ─── Page Boutique ("/boutique") ──────────────────────────────────────────
 // Maintenant connectée à l'API Django pour afficher les produits par catégorie
@@ -78,32 +79,13 @@ export default function Boutique() {
               gap: 24,
             }}>
               {filteredProducts.map(p => (
-                <div key={p.id} style={{ background: "var(--bg-white)", borderRadius: 12, overflow: "hidden", boxShadow: "0 4px 20px rgba(0,0,0,0.08)" }}>
-                  <div style={{ padding: "20px", textAlign: "center" }}>
-                    <h3 style={{ fontSize: 16, fontWeight: 700, margin: "0 0 8px" }}>{p.name}</h3>
-                    <p style={{ color: "var(--text-secondary)", fontSize: 14, margin: "0 0 12px" }}>{p.description}</p>
-                    <p style={{ fontSize: 18, fontWeight: 800, color: "#1d4ed8" }}>{p.price/1000} {p.price % 1000 === 0 ? "USD" : "USD"}</p>
-                    <button
-                      onClick={() => handleAdd(p)}
-                      style={{
-                        width: "100%",
-                        marginTop: 8,
-                        padding: "12px 20px",
-                        borderRadius: 8,
-                        border: "none",
-                        cursor: "pointer",
-                        fontWeight: 700,
-                        fontSize: 14,
-                        color: "#fff",
-                        background: addedId === p.id ? "#16a34a" : "#1d4ed8",
-                        transition: "background 0.3s ease",
-                      }}
-                    >
-                      {addedId === p.id ? "✓ Ajouté au panier" : "Ajouter au panier"}
-                    </button>
-                  </div>
-                </div>
-              ))}
+  <ProductCard
+    key={p.id}
+    product={p}
+    onAdd={handleAdd}
+    isAdded={addedId === p.id}
+  />
+))}
             </div>
           )}
         </div>
