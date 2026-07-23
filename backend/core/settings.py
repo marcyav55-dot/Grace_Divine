@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     # Bibliothèques tierces
     'rest_framework',
     'corsheaders',
+    'django_filters',
     
     # Nos applications
     'apps.accounts',
@@ -124,6 +125,13 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "http://localhost:5174",
+    "http://127.0.0.1:5174",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
+
+# Configuration VAPID pour les notifications push
+VAPID_PRIVATE_KEY = os.getenv('VAPID_PRIVATE_KEY')
+VAPID_PUBLIC_KEY = os.getenv('VAPID_PUBLIC_KEY')
+VAPID_CLAIMS_EMAIL = os.getenv('VAPID_CLAIMS_EMAIL', 'mailto:contact@example.com')

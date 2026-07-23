@@ -63,3 +63,18 @@ class PageVisit(models.Model):
 
     def __str__(self):
         return f"{self.path} — {self.visited_at:%d/%m/%Y %H:%M}"
+
+
+class PushSubscription(models.Model):
+    """Abonnement d'un visiteur aux notifications push du navigateur."""
+    endpoint = models.URLField(max_length=500, unique=True)
+    p256dh = models.CharField(max_length=200)
+    auth = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Abonnement notification"
+        verbose_name_plural = "Abonnements notifications"
+
+    def __str__(self):
+        return f"Abonnement — {self.endpoint[:50]}..."

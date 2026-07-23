@@ -58,15 +58,11 @@ export default function Services() {
   }, [slug]);
 
   if (loading) {
-    return <div style={{ marginTop: 110, padding: 40, textAlign: "center" }}>Chargement...</div>;
+    return <div>Chargement...</div>;
   }
 
   if (error) {
-    return (
-      <div style={{ marginTop: 110, padding: 40, textAlign: "center", color: "#dc2626" }}>
-        Erreur : {error}
-      </div>
-    );
+    return <div>Erreur : {error}</div>;
   }
 
   return (

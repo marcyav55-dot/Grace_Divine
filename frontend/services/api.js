@@ -48,3 +48,51 @@ export const api = {
     return await this.get('/api/services/categories/');
   }
 };
+// ─── Méthodes d'authentification ───────────────────────────────────────
+export const authApi = {
+  baseUrl: import.meta.env.VITE_API_URL || 'http://localhost:8000',
+
+  async register(data) {
+    const response = await fetch(`${this.baseUrl}/api/auth/register/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+      const err = await response.json();
+      throw new Error(JSON.stringify(err));
+    }
+    return await response.json();
+  },
+
+  async login(username, password) {
+    const response = await fetch(`${this.baseUrl}/api/auth/login/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
+    if (!response.ok) throw new Error('Identifiants invalides');
+    const data = await response.json();
+    localStorage.setItem('access_token', data.access);
+    localStorage.setItem('refresh_token', data.refresh);
+    return data;
+  },
+
+  async getProfile() {
+    const token = localStorage.getItem('access_token');
+    const response = await fetch(`${this.baseUrl}/api/auth/profile/`, {
+      headers: { 'Authorization': `Bearer ${token}` },
+    });
+    if (!response.ok) throw new Error('Non authentifié');
+    return await response.json();
+  },
+
+  logout() {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+  },
+
+  isLoggedIn() {
+    return !!localStorage.getItem('access_token');
+  }
+};
