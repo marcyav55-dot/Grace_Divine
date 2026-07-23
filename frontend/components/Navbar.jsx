@@ -1,21 +1,24 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./navbar.css";
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
   const [theme, setTheme] = React.useState('light');
-  
+
   const toggleTheme = () => {
     setTheme(prev => prev === 'dark' ? 'light' : 'dark');
   };
-  
+
   React.useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
-  
+
   const location = useLocation();
+  const navigate = useNavigate();
   const { items } = useCart();
+  const { user, logout } = useAuth();
   const itemCount = items.reduce((sum, i) => sum + i.qty, 0);
   const [scrolled, setScrolled] = React.useState(false);
   const [menuOpen, setMenuOpen] = React.useState(false);
@@ -34,6 +37,12 @@ const Navbar = () => {
     { path: "/blog", label: "Blog" },
     { path: "/contact", label: "Contact" },
   ];
+
+  const handleLogout = () => {
+    logout();
+    setMenuOpen(false);
+    navigate("/");
+  };
 
   return (
     <nav className={`navbar ${theme} ${scrolled ? "scrolled" : ""}`}>
@@ -110,6 +119,44 @@ const Navbar = () => {
           >
             🛒 Panier {itemCount > 0 && `(${itemCount})`}
           </Link>
+
+          <hr style={{ margin: "12px 0", opacity: 0.2 }} />
+
+          {user ? (
+            <>
+              <Link
+                to="/profil"
+                className={`nav-link ${location.pathname === "/profil" ? 'active' : ''}`}
+                onClick={() => setMenuOpen(false)}
+              >
+                👤 Mon compte ({user.username})
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="nav-link"
+                style={{ background: "none", border: "none", textAlign: "left", cursor: "pointer" }}
+              >
+                🚪 Déconnexion
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className={`nav-link ${location.pathname === "/login" ? 'active' : ''}`}
+                onClick={() => setMenuOpen(false)}
+              >
+                → Se connecter
+              </Link>
+              <Link
+                to="/register"
+                className={`nav-link ${location.pathname === "/register" ? 'active' : ''}`}
+                onClick={() => setMenuOpen(false)}
+              >
+                + Créer un compte
+              </Link>
+            </>
+          )}
         </div>
       )}
     </nav>
