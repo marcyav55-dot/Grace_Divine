@@ -2,19 +2,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { colorMap } from "../data/siteData";
 
-// ─── Carte d'un service (utilisée dans le carrousel et la page Services) ────
-// props :
-//   - service    : un objet du tableau SERVICES (data/siteData.js)
-//   - interactive: si false, on désactive l'effet de survol (hover)
-//                   -> utile pour les cartes secondaires du carrousel
 export default function ServiceCard({ service, interactive = true }) {
   const [hovered, setHovered] = useState(false);
-
-  // Couleurs spécifiques à ce service (bordure, badge, fond clair)
   const c = colorMap[service.color] || colorMap.blue;
-
-  // Les services "boutique" (informatique / habillement) renvoient vers /boutique,
-  // les autres vers leur page /services/:slug
   const isShop = service.cta === "VOIR LA BOUTIQUE";
   const linkTo = isShop ? `/boutique?cat=${service.slug}` : `/services/${service.slug}`;
 
@@ -28,7 +18,6 @@ export default function ServiceCard({ service, interactive = true }) {
         overflow: "hidden",
         width: "100%",
         height: "100%",
-        // Au survol : ombre plus marquée + bordure colorée
         boxShadow: hovered
           ? `0 20px 50px rgba(0,0,0,0.18), 0 0 0 2px ${c.border}`
           : "0 4px 20px rgba(0,0,0,0.08)",
@@ -37,69 +26,67 @@ export default function ServiceCard({ service, interactive = true }) {
         border: `1px solid ${hovered ? c.border : "#f1f5f9"}`,
       }}
     >
-      {/* ─── En-tête : icône + titre ──────────────────────────────────────── */}
       <div style={{
-        // Au survol, le fond devient un dégradé coloré (couleur du service)
-        background: hovered
-          ? `linear-gradient(135deg, ${c.badge}, ${c.border})`
-          : c.light,
+        position: "relative",
+        height: 150,
+        backgroundImage: `url(${service.img})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
         padding: "24px 20px 20px",
-        transition: "background 0.3s",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-end",
+        transition: "all 0.3s",
       }}>
         <div style={{
-          width: 52, height: 52, borderRadius: 14,
-          background: hovered ? "rgba(255,255,255,0.2)" : "#fff",
+          position: "absolute", inset: 0,
+          background: hovered
+            ? `linear-gradient(135deg, ${c.badge}e6, ${c.border}e6)`
+            : "linear-gradient(180deg, rgba(15,23,42,0.05) 0%, rgba(15,23,42,0.7) 100%)",
+          transition: "background 0.3s",
+        }} />
+        <div style={{
+          position: "relative", zIndex: 1,
+          width: 44, height: 44, borderRadius: 12,
+          background: "rgba(255,255,255,0.92)",
           display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: 26, marginBottom: 12,
-          boxShadow: hovered ? "none" : `0 4px 12px ${c.border}30`,
-          transition: "all 0.3s",
+          fontSize: 22, marginBottom: 10,
+          boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
         }}>
           {service.icon}
         </div>
         <h3 style={{
+          position: "relative", zIndex: 1,
           fontSize: 14, fontWeight: 800,
-          color: hovered ? "#fff" : "#0f172a",
+          color: "#fff",
           margin: 0, lineHeight: 1.3,
-          transition: "color 0.3s",
+          textShadow: "0 1px 4px rgba(0,0,0,0.4)",
         }}>
           {service.title}
         </h3>
       </div>
 
-      {/* ─── Corps : liste des prestations du service ────────────────────── */}
       <div style={{ padding: "16px 20px", flex: 1 }}>
         <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 8 }}>
           {(service.items || (service.description ? [service.description] : [])).map((item, i) => (
-            <li key={i} style={{
-              display: "flex", alignItems: "center", gap: 8,
-              fontSize: 13, color: "var(--text-secondary)",
-            }}>
-              {/* petite puce ronde colorée */}
-              <span style={{
-                width: 6, height: 6, borderRadius: "50%",
-                background: c.border, flexShrink: 0,
-              }} />
+            <li key={i} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: "var(--text-secondary)" }}>
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: c.border, flexShrink: 0 }} />
               {item}
             </li>
           ))}
         </ul>
       </div>
 
-      {/* ─── Pied : bouton d'action (lien interne via React Router) ─────────── */}
       <div style={{ padding: "0 20px 20px" }}>
         <Link to={linkTo} style={{
           display: "block", textAlign: "center", textDecoration: "none",
           width: "100%",
-          background: hovered
-            ? `linear-gradient(135deg, ${c.badge}, ${c.border})`
-            : "#fff",
+          background: hovered ? `linear-gradient(135deg, ${c.badge}, ${c.border})` : "#fff",
           color: hovered ? "#fff" : c.badge,
           border: `2px solid ${c.border}`,
           borderRadius: 8, padding: "10px 0",
-          fontWeight: 800, fontSize: 12,
-          letterSpacing: 1,
-          transition: "all 0.3s",
-          boxSizing: "border-box",
+          fontWeight: 800, fontSize: 12, letterSpacing: 1,
+          transition: "all 0.3s", boxSizing: "border-box",
         }}>
           {service.cta} →
         </Link>
