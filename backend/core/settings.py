@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'apps.services',
     'apps.orders',
     'apps.content',
+    'apps.contact'
     # 'apps.notifications',
 ]
 

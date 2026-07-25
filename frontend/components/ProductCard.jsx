@@ -1,123 +1,133 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { api } from "../services/api";
+import { BADGES } from "../utils/productEnrichment";
+import ProductViewer from "./ProductViewer";
+import "./product-card.css";
 
-const PLACEHOLDER = "https://via.placeholder.com/400x300?text=Produit";
+const PLACEHOLDER =
+  "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='400' viewBox='0 0 500 400'%3E%3Crect width='500' height='400' fill='%23e2e8f0'/%3E%3Ctext x='50%25' y='50%25' font-family='sans-serif' font-size='22' fill='%2394a3b8' text-anchor='middle' dominant-baseline='middle'%3E📦 Image indisponible%3C/text%3E%3C/svg%3E";
 
 function resolveImg(path) {
   if (!path) return PLACEHOLDER;
   return path.startsWith("http") ? path : `${api.baseUrl}${path}`;
 }
 
-export default function ProductCard({ product, onAdd, isAdded }) {
-  const [showGallery, setShowGallery] = useState(false);
-  const [current, setCurrent] = useState(0);
+function Stars({ rating }) {
+  const stars = [];
+  for (let i = 1; i <= 5; i++) {
+    if (rating >= i) stars.push("★");
+    else if (rating >= i - 0.5) stars.push("★");
+    else stars.push("☆");
+  }
+  return <span className="product-stars">{stars.join("")}</span>;
+}
 
-  // Le backend n'a qu'un seul champ "image" pour l'instant.
-  // Quand un champ "images" (tableau) sera ajouté côté Django,
-  // le carrousel affichera automatiquement toutes les photos.
-  const images = product.images?.length ? product.images : [product.image];
+export default function ProductCard({ product, onAdd, isAdded }) {
+  const [viewerOpen, setViewerOpen] = useState(false);
+  const [isFav, setIsFav] = useState(false);
+  const lastClosedAt = useRef(0);
+
+  const images = product.gallery_images?.length
+    ? [product.image, ...product.gallery_images.map(g => g.image)].filter(Boolean)
+    : [product.image];
   const resolvedImages = images.map(resolveImg);
 
-  const next = () => setCurrent((c) => (c + 1) % resolvedImages.length);
-  const prev = () => setCurrent((c) => (c - 1 + resolvedImages.length) % resolvedImages.length);
+  const badgeInfo = BADGES[product.badge];
+  const priceUSD = Number(product.price).toFixed(2);
+  const oldPriceUSD = product.oldPrice ? Number(product.oldPrice).toFixed(2) : null;
+
+  const handleOpenViewer = () => {
+    // Ignore les clics fantômes qui suivent immédiatement une fermeture
+    if (Date.now() - lastClosedAt.current < 400) return;
+    setViewerOpen(true);
+  };
+
+  const handleCloseViewer = () => {
+    lastClosedAt.current = Date.now();
+    setViewerOpen(false);
+  };
 
   return (
-    <div style={{
-      background: "var(--bg-white)",
-      borderRadius: 12,
-      overflow: "hidden",
-      boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-    }}>
-      {showGallery ? (
-        <div style={{ position: "relative" }}>
-          <div style={{
-            width: "100%",
-            height: 220,
-            backgroundImage: `url(${resolvedImages[current]})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }} />
-          {resolvedImages.length > 1 && (
-            <>
-              <button onClick={prev} style={navBtnStyle("left")}>‹</button>
-              <button onClick={next} style={navBtnStyle("right")}>›</button>
-            </>
-          )}
-          <div style={{
-            position: "absolute", bottom: 8, left: 0, right: 0,
-            display: "flex", justifyContent: "center", gap: 6,
-          }}>
-            {resolvedImages.map((_, i) => (
-              <span key={i} style={{
-                width: i === current ? 18 : 8, height: 8, borderRadius: 4,
-                background: i === current ? "#f59e0b" : "rgba(255,255,255,0.7)",
-                transition: "all 0.3s",
-              }} />
-            ))}
-          </div>
-          <div style={{ padding: 16, textAlign: "center" }}>
-            <button
-              onClick={() => setShowGallery(false)}
-              style={{
-                width: "100%", padding: "10px 0", borderRadius: 8,
-                border: "2px solid #1d4ed8", background: "#fff",
-                color: "#1d4ed8", fontWeight: 700, fontSize: 13, cursor: "pointer",
-              }}
-            >
-              ← Retour au produit
-            </button>
-          </div>
-        </div>
-      ) : (
-        <div style={{
-          position: "relative",
-          padding: "20px",
-          textAlign: "center",
-          minHeight: 220,
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.93)), url(${resolvedImages[0]})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}>
-          <h3 style={{ fontSize: 16, fontWeight: 700, margin: "0 0 8px" }}>{product.name}</h3>
-          <p style={{ color: "var(--text-secondary)", fontSize: 14, margin: "0 0 12px" }}>{product.description}</p>
-          <p style={{ fontSize: 18, fontWeight: 800, color: "#1d4ed8" }}>{product.price / 1000} USD</p>
+    <div className="product-card">
+      <div className="product-card-media">
+        <img
+          src={resolvedImages[0]}
+          alt={product.name}
+          loading="lazy"
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = PLACEHOLDER;
+          }}
+        />
 
+        {badgeInfo && (
+          <span className={`product-badge badge-${product.badge}`}>
+            {badgeInfo.icon ? `${badgeInfo.icon} ` : ""}{badgeInfo.label}
+          </span>
+        )}
+
+        <button
+          className={`product-fav-btn ${isFav ? "is-fav" : ""}`}
+          onClick={(e) => { e.stopPropagation(); setIsFav((f) => !f); }}
+          aria-label="Ajouter aux favoris"
+        >
+          {isFav ? "❤️" : "🤍"}
+        </button>
+      </div>
+
+      <div className="product-card-body">
+        <h3 className="product-title">{product.name}</h3>
+
+        <div className="product-rating-row">
+          <Stars rating={product.rating} />
+          <span className="product-rating-value">{product.rating}/5</span>
+          <span className="product-reviews-count">({product.reviewsCount} avis)</span>
+        </div>
+
+        <div className="product-price-row">
+          <span className="product-price">{priceUSD} $</span>
+          {oldPriceUSD && <span className="product-old-price">{oldPriceUSD} $</span>}
+        </div>
+
+        <p className="product-desc">{product.description}</p>
+
+        <div className="product-meta-row">
+          <span className={`product-stock ${product.inStock ? "in-stock" : "out-stock"}`}>
+            {product.inStock ? "✅ En stock" : "⏳ Rupture temporaire"}
+          </span>
+          {product.fastDelivery && (
+            <span className="product-delivery">🚚 Livraison rapide</span>
+          )}
+        </div>
+
+        <div className="product-actions">
           <button
-            onClick={() => { setShowGallery(true); setCurrent(0); }}
-            style={{
-              width: "100%", marginTop: 4, marginBottom: 8,
-              padding: "10px 20px", borderRadius: 8, border: "none",
-              cursor: "pointer", fontWeight: 700, fontSize: 13,
-              color: "#fff", background: "#f59e0b",
-            }}
+            type="button"
+            className="product-btn product-btn-secondary"
+            onClick={handleOpenViewer}
           >
             🖼️ Voir les photos
           </button>
 
           <button
+            className={`product-btn product-btn-primary ${isAdded ? "is-added" : ""}`}
             onClick={() => onAdd(product)}
-            style={{
-              width: "100%", padding: "12px 20px", borderRadius: 8,
-              border: "none", cursor: "pointer", fontWeight: 700, fontSize: 14,
-              color: "#fff",
-              background: isAdded ? "#16a34a" : "#1d4ed8",
-              transition: "background 0.3s ease",
-            }}
+            disabled={!product.inStock}
           >
-            {isAdded ? "✓ Ajouté au panier" : "Ajouter au panier"}
+            {isAdded ? "✓ Ajouté au panier" : "🛒 Ajouter au panier"}
           </button>
         </div>
+      </div>
+
+      {viewerOpen && (
+        <ProductViewer
+          product={product}
+          images={resolvedImages}
+          onClose={handleCloseViewer}
+          onAdd={onAdd}
+          isAdded={isAdded}
+        />
       )}
     </div>
   );
-}
-
-function navBtnStyle(side) {
-  return {
-    position: "absolute", top: "50%", [side]: 8,
-    transform: "translateY(-50%)",
-    width: 34, height: 34, borderRadius: "50%",
-    border: "none", background: "rgba(15,23,42,0.55)", color: "#fff",
-    fontSize: 20, cursor: "pointer",
-  };
 }

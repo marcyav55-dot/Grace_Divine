@@ -44,11 +44,15 @@ export default function Boutique() {
   };
 
   if (loading) {
-    return <div>Chargement...</div>;
+    return <div style={{ marginTop: 110, padding: 40, textAlign: "center" }}>Chargement...</div>;
   }
 
   if (error) {
-    return <div>Erreur : {error}</div>;
+    return (
+      <div style={{ marginTop: 110, padding: 40, textAlign: "center", color: "#dc2626" }}>
+        Erreur : {error}
+      </div>
+    );
   }
 
   return (

@@ -1,7 +1,6 @@
 import { WHATSAPP_NUMBER } from "../data/siteData";
 
 // ─── Bandeau de statistiques (500+ clients, 6 domaines, etc.) ───────────────
-// Affiché sur la page d'accueil, juste après le carrousel de services.
 export function StatsStrip() {
   const stats = [
     { value: "500+", label: "Clients satisfaits", icon: "🤝" },
@@ -12,25 +11,46 @@ export function StatsStrip() {
   return (
     <div style={{
       background: "linear-gradient(135deg, #0a1e50, #1d4ed8)",
-      padding: "40px 24px",
+      padding: "44px 24px",
     }}>
-      {/* Grille responsive : autant de colonnes que de place disponible */}
-      <div style={{
-        maxWidth: 1200, margin: "0 auto",
-        display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
-        gap: 24, textAlign: "center",
-      }}>
+      <style>{`
+        .stats-grid {
+          max-width: 1200px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 16px;
+        }
+        .stats-card {
+          background: rgba(255,255,255,0.06);
+          border: 1px solid rgba(255,255,255,0.12);
+          border-radius: 16px;
+          padding: 22px 12px;
+          text-align: center;
+          transition: transform 0.25s ease, background 0.25s ease;
+        }
+        .stats-card:hover {
+          transform: translateY(-3px);
+          background: rgba(255,255,255,0.1);
+        }
+        @media (max-width: 640px) {
+          .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+          }
+          .stats-card {
+            padding: 18px 10px;
+          }
+        }
+      `}</style>
+      <div className="stats-grid">
         {stats.map((s, i) => (
-          <div key={i} style={{
-            padding: "20px 16px",
-            // séparateur vertical entre chaque statistique (sauf la dernière)
-            borderRight: i < stats.length - 1 ? "1px solid rgba(255,255,255,0.12)" : "none",
-          }}>
-            <div style={{ fontSize: 28, marginBottom: 8 }}>{s.icon}</div>
-            <div style={{ fontSize: 36, fontWeight: 900, color: "#f59e0b", lineHeight: 1 }}>
+          <div key={i} className="stats-card">
+            <div style={{ fontSize: 26, marginBottom: 8 }}>{s.icon}</div>
+            <div style={{ fontSize: 30, fontWeight: 900, color: "#f59e0b", lineHeight: 1 }}>
               {s.value}
             </div>
-            <div style={{ color: "#94a3b8", fontSize: 13, marginTop: 6 }}>{s.label}</div>
+            <div style={{ color: "#cbd5e1", fontSize: 12.5, marginTop: 6 }}>{s.label}</div>
           </div>
         ))}
       </div>
@@ -39,7 +59,6 @@ export function StatsStrip() {
 }
 
 // ─── Bandeau "Call To Action" en bas de la page d'accueil ───────────────────
-// Encourage l'utilisateur à contacter l'entreprise via WhatsApp ou formulaire.
 export function CTABanner() {
   return (
     <section style={{
@@ -59,7 +78,6 @@ export function CTABanner() {
           Contactez-nous via WhatsApp pour un devis rapide et gratuit.
         </p>
         <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-          {/* Bouton WhatsApp (vert) -> ouvre une conversation directe */}
           <a
             href={`https://wa.me/${WHATSAPP_NUMBER}`}
             target="_blank"
@@ -69,17 +87,16 @@ export function CTABanner() {
               background: "linear-gradient(135deg, #25D366, #128C7E)",
               color: "#fff", border: "none", textDecoration: "none",
               cursor: "pointer",
-              padding: "14px 32px", borderRadius: 8,
+              padding: "14px 32px", borderRadius: 999,
               fontWeight: 800, fontSize: 14, letterSpacing: 0.5,
             }}
           >
             💬 WhatsApp
           </a>
-          {/* Bouton vers la page /contact (formulaire) */}
           <a href="/contact" style={{
             background: "transparent", color: "#fff", textDecoration: "none",
             border: "2px solid rgba(255,255,255,0.8)", cursor: "pointer",
-            padding: "14px 32px", borderRadius: 8,
+            padding: "14px 32px", borderRadius: 999,
             fontWeight: 700, fontSize: 14,
             display: "inline-flex", alignItems: "center",
           }}>

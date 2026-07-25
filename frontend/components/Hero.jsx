@@ -9,28 +9,19 @@ export default function Hero() {
   // Index de la slide actuellement affichée
   const [current, setCurrent] = useState(0);
 
-  // true pendant la transition en fondu douce entre deux slides
-  const [animating, setAnimating] = useState(false);
-
   // Référence vers le minuteur du défilement automatique
   const timerRef = useRef(null);
 
-  // Change de slide avec un fondu doux (900ms, plus lent et fluide)
-  const goTo = (idx) => {
-    if (animating || idx === current) return;
-    setAnimating(true);
-    setTimeout(() => {
-      setCurrent(idx);
-      setTimeout(() => setAnimating(false), 50);
-    }, 900);
-  };
+  // Change de slide directement : le fondu est géré en CSS (voir plus bas),
+  // donc plus besoin d'un état "animating" qui bloquait/faisait clignoter.
+  const goTo = (idx) => setCurrent(idx);
 
   const next = () => goTo((current + 1) % SLIDES.length);
   const prev = () => goTo((current - 1 + SLIDES.length) % SLIDES.length);
 
-  // ─── Défilement automatique toutes les 6.5 secondes (plus posé) ────────
+  // ─── Défilement automatique, plus lent : toutes les 7,5 secondes ───────
   useEffect(() => {
-    timerRef.current = setInterval(next, 6500);
+    timerRef.current = setInterval(next, 7500);
     return () => clearInterval(timerRef.current);
   }, [current]);
 
@@ -44,42 +35,62 @@ export default function Hero() {
       overflow: "hidden",
       marginTop: 110, // espace pour la Navbar fixe en haut
     }}>
-      {/* Animation de pulsation pour le bouton boutique */}
+      {/* ─── Injection des keyframes pour le fondu du texte et le zoom lent ── */}
       <style>{`
-        @keyframes pulseGlow {
-          0%   { box-shadow: 0 4px 20px rgba(29,78,216,0.4), 0 0 0 0 rgba(29,78,216,0.5); }
-          70%  { box-shadow: 0 4px 20px rgba(29,78,216,0.4), 0 0 0 12px rgba(29,78,216,0); }
-          100% { box-shadow: 0 4px 20px rgba(29,78,216,0.4), 0 0 0 0 rgba(29,78,216,0); }
+        @keyframes heroTextIn {
+          from { opacity: 0; transform: translateY(14px); }
+          to   { opacity: 1; transform: translateY(0); }
         }
-        .btn-boutique-pulse {
-          animation: pulseGlow 2.2s ease-out infinite;
+        @keyframes heroKenBurns {
+          from { transform: scale(1); }
+          to   { transform: scale(1.09); }
         }
       `}</style>
 
-      {/* ─── Image de fond de la slide actuelle (fondu doux et lent) ───────── */}
-      <div style={{
-        position: "absolute", inset: 0,
-        backgroundImage: `url(${slide.img})`,
-        backgroundSize: "cover", backgroundPosition: "center",
-        opacity: animating ? 0 : 1,
-        transition: "opacity 0.9s ease-in-out",
-      }} />
+      {/* ─── Toutes les images sont montées en même temps, superposées ────
+          On fait varier uniquement l'opacité (transition longue = fondu-
+          enchaîné doux) au lieu de démonter/remonter l'image, ce qui
+          supprime le petit "flash" qu'on avait avant. */}
+      <div style={{ position: "absolute", inset: 0 }}>
+        {SLIDES.map((s, i) => (
+          <div
+            key={i}
+            style={{
+              position: "absolute", inset: 0,
+              backgroundImage: `url(${s.img})`,
+              backgroundSize: "cover", backgroundPosition: "center",
+              opacity: i === current ? 1 : 0,
+              // Fondu lent et doux entre les slides
+              transition: "opacity 1.6s ease-in-out",
+              // Effet "Ken Burns" : zoom très lent pendant que la slide est visible
+              animation: i === current ? "heroKenBurns 9s ease-out forwards" : "none",
+              willChange: "opacity, transform",
+            }}
+          />
+        ))}
+      </div>
 
-      {/* Voile dégradé sombre pour que le texte blanc reste lisible */}
+      {/* Voile allégé : plus de transparence pour laisser voir le fond,
+          concentré surtout en bas / à gauche (comme CasaKonnect), avec un
+          fort text-shadow sur le texte pour compenser la lisibilité. */}
       <div style={{
         position: "absolute", inset: 0,
-        background: "linear-gradient(90deg, rgba(10,30,80,0.55) 0%, rgba(10,30,80,0.35) 60%, rgba(10,30,80,0.1) 100%)",
+        background: `
+          linear-gradient(100deg, rgba(6,16,45,0.6) 0%, rgba(6,16,45,0.35) 45%, rgba(6,16,45,0.1) 75%),
+          linear-gradient(0deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 35%)
+        `,
       }} />
 
       {/* ─── Contenu texte (titre, sous-titre, boutons) ──────────────────── */}
-      <div style={{
-        position: "relative", zIndex: 2,
-        maxWidth: 1200, margin: "0 auto",
-        padding: "60px 32px",
-        opacity: animating ? 0 : 1,
-        transform: animating ? "translateX(-14px)" : "translateX(0)",
-        transition: "all 0.9s ease-in-out",
-      }}>
+      <div
+        key={current}
+        style={{
+          position: "relative", zIndex: 2,
+          maxWidth: 1200, margin: "0 auto",
+          padding: "60px 32px",
+          animation: "heroTextIn 0.7s ease",
+        }}
+      >
         {/* Badge "GRÂCE DIVINE" */}
         <div style={{
           display: "inline-block",
@@ -96,7 +107,7 @@ export default function Hero() {
           fontWeight: 900, color: "#fff",
           margin: "0 0 16px",
           lineHeight: 1.05,
-          textShadow: "0 2px 20px rgba(0,0,0,0.5)",
+          textShadow: "0 3px 24px rgba(0,0,0,0.65), 0 1px 4px rgba(0,0,0,0.8)",
         }}>
           {slide.title}
         </h1>
@@ -113,14 +124,16 @@ export default function Hero() {
           fontSize: "clamp(1rem, 3vw, 1.5rem)",
           fontWeight: 700, color: "#e2e8f0",
           margin: "0 0 20px", maxWidth: 520, lineHeight: 1.4,
+          textShadow: "0 2px 12px rgba(0,0,0,0.6)",
         }}>
           {slide.subtitle}
         </h2>
 
         {/* Description */}
         <p style={{
-          color: "#94a3b8", fontSize: 15, lineHeight: 1.7,
+          color: "#cbd5e1", fontSize: 15, lineHeight: 1.7,
           maxWidth: 460, marginBottom: 36,
+          textShadow: "0 1px 8px rgba(0,0,0,0.6)",
         }}>
           {slide.desc}
         </p>
@@ -148,23 +161,6 @@ export default function Hero() {
             }}
           >
             🔍 DÉCOUVRIR NOS SERVICES
-          </button>
-
-          {/* Bouton "Voir la boutique" (animé, pulsation) -> redirige direct vers /boutique */}
-          <button
-            onClick={() => navigate("/boutique")}
-            className="btn-boutique-pulse"
-            style={{
-              background: "linear-gradient(135deg, #1d4ed8, #1e3a8a)",
-              color: "#fff", border: "none", cursor: "pointer",
-              padding: "14px 28px", borderRadius: 6,
-              fontWeight: 800, fontSize: 13, letterSpacing: 1,
-              transition: "transform 0.2s",
-            }}
-            onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; }}
-          >
-            🛒 VOIR LA BOUTIQUE
           </button>
 
           {/* Bouton "Nous contacter" -> ouvre WhatsApp (vert) */}
@@ -235,6 +231,7 @@ export default function Hero() {
             key={i}
             onClick={() => goTo(i)}
             style={{
+              // Le point de la slide active est plus large (28px) et orange
               width: i === current ? 28 : 10,
               height: 10, borderRadius: 5,
               background: i === current ? "#f59e0b" : "rgba(255,255,255,0.4)",

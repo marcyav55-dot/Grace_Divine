@@ -1,103 +1,127 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { api } from "../services/api";
+import { SERVICES } from "../data/siteData";
+
+// ─── Slugs des services qui redirigent vers la Boutique plutôt que /services ─
+const BOUTIQUE_SLUGS = ["produits-informatiques", "habillement"];
+
+// ─── Construction d'un index de recherche à plat : service + chaque item ────
+// Chaque entrée est soit le service lui-même (titre/desc), soit un de ses
+// "items" (ex: "Ordinateurs", "Chaussures") rattaché à son service parent.
+function buildSearchIndex() {
+  const index = [];
+  SERVICES.forEach((service) => {
+    index.push({
+      type: "service",
+      label: service.title,
+      sub: service.desc,
+      icon: service.icon,
+      slug: service.slug,
+    });
+    (service.items || []).forEach((item) => {
+      index.push({
+        type: BOUTIQUE_SLUGS.includes(service.slug) ? "produit" : "prestation",
+        label: item,
+        sub: service.title,
+        icon: service.icon,
+        slug: service.slug,
+      });
+    });
+  });
+  return index;
+}
+
+const SEARCH_INDEX = buildSearchIndex();
 
 export default function SearchBar({ onClose }) {
-  const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const debounceRef = useRef(null);
+  const [query, setQuery] = useState("");
+  const inputRef = useRef(null);
+  const wrapperRef = useRef(null);
 
+  // Focus automatique à l'ouverture
   useEffect(() => {
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    if (query.trim().length < 2) {
-      setResults([]);
-      return;
-    }
-    setLoading(true);
-    debounceRef.current = setTimeout(async () => {
-      try {
-        const data = await api.search(query);
-        setResults(data.slice(0, 6));
-      } catch {
-        setResults([]);
-      } finally {
-        setLoading(false);
+    inputRef.current?.focus();
+  }, []);
+
+  // Fermeture si on clique en dehors, ou touche Échap
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+        onClose();
       }
-    }, 350);
-    return () => clearTimeout(debounceRef.current);
+    };
+    const handleKey = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("mousedown", handleClick);
+    document.addEventListener("keydown", handleKey);
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+      document.removeEventListener("keydown", handleKey);
+    };
+  }, [onClose]);
+
+  // Filtrage en direct (insensible à la casse / aux accents basiques)
+  const results = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return [];
+    return SEARCH_INDEX.filter(
+      (entry) =>
+        entry.label.toLowerCase().includes(q) ||
+        entry.sub.toLowerCase().includes(q)
+    ).slice(0, 8);
   }, [query]);
 
-  const goToResult = (item) => {
+  const goToResult = (entry) => {
+    if (BOUTIQUE_SLUGS.includes(entry.slug)) {
+      navigate(`/boutique?cat=${entry.slug}`);
+    } else {
+      navigate(`/services?focus=${entry.slug}`);
+    }
     setQuery("");
-    setResults([]);
-    if (onClose) onClose();
-    navigate(item.is_service ? `/services/${item.category?.slug}` : "/boutique");
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (query.trim().length < 2) return;
-    if (onClose) onClose();
-    navigate(`/recherche?q=${encodeURIComponent(query)}`);
+    onClose();
   };
 
   return (
-    <div style={{ position: "relative", width: "100%" }}>
-      <form onSubmit={handleSubmit} style={{ display: "flex", alignItems: "center" }}>
+    <div className="nav-search-bar" ref={wrapperRef}>
+      <div className="nav-search-input-row">
+        <span className="nav-search-icon">🔍</span>
         <input
-          autoFocus
+          ref={inputRef}
           type="text"
           value={query}
-          onChange={e => setQuery(e.target.value)}
-          placeholder="Rechercher un produit ou service..."
-          style={{
-            width: "100%", padding: "10px 14px", borderRadius: 8,
-            border: "1px solid #cbd5e1", fontSize: 14, fontFamily: "inherit",
-            boxSizing: "border-box",
-          }}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Rechercher un service ou un produit…"
+          className="nav-search-input"
         />
-        <button type="submit" style={{
-          marginLeft: 8, background: "#1d4ed8", color: "#fff", border: "none",
-          borderRadius: 8, padding: "10px 14px", cursor: "pointer", fontSize: 16,
-        }}>
-          🔍
+        <button className="nav-search-close" onClick={onClose} aria-label="Fermer la recherche">
+          ✕
         </button>
-      </form>
+      </div>
 
-      {/* ─── Suggestions live ──────────────────────────────────────────── */}
-      {query.trim().length >= 2 && (
-        <div style={{
-          position: "absolute", top: "110%", left: 0, right: 0,
-          background: "#fff", borderRadius: 8, boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
-          zIndex: 50, maxHeight: 320, overflowY: "auto",
-        }}>
-          {loading && (
-            <div style={{ padding: 14, fontSize: 13, color: "#64748b" }}>Recherche...</div>
+      {query.trim() && (
+        <div className="nav-search-results">
+          {results.length === 0 ? (
+            <p className="nav-search-empty">Aucun résultat pour « {query} »</p>
+          ) : (
+            results.map((entry, i) => (
+              <button
+                key={i}
+                className="nav-search-result"
+                onClick={() => goToResult(entry)}
+              >
+                <span className="nav-search-result-icon">{entry.icon}</span>
+                <span className="nav-search-result-text">
+                  <span className="nav-search-result-label">{entry.label}</span>
+                  <span className="nav-search-result-sub">
+                    {entry.type === "produit" ? "Boutique · " : entry.type === "prestation" ? "Service · " : ""}
+                    {entry.sub}
+                  </span>
+                </span>
+              </button>
+            ))
           )}
-          {!loading && results.length === 0 && (
-            <div style={{ padding: 14, fontSize: 13, color: "#64748b" }}>Aucun résultat.</div>
-          )}
-          {!loading && results.map(item => (
-            <div
-              key={item.id}
-              onClick={() => goToResult(item)}
-              style={{
-                padding: "10px 14px", cursor: "pointer", fontSize: 14,
-                borderBottom: "1px solid #f1f5f9",
-                display: "flex", justifyContent: "space-between", alignItems: "center",
-              }}
-            >
-              <div>
-                <div style={{ fontWeight: 700, color: "#1a202c" }}>{item.name}</div>
-                <div style={{ fontSize: 12, color: "#64748b" }}>{item.category?.name}</div>
-              </div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: "#1d4ed8" }}>
-                {Number(item.price).toLocaleString()} FC
-              </div>
-            </div>
-          ))}
         </div>
       )}
     </div>

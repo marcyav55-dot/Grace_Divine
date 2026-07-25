@@ -7,9 +7,9 @@ export default function Panier() {
   const buildWhatsAppMessage = () => {
     let msg = "Bonjour, je souhaite commander :%0A%0A";
     items.forEach((i) => {
-      msg += `- ${i.name} x${i.qty} (${(i.price * i.qty).toLocaleString()} CDF)%0A`;
+      msg += `- ${i.name} x${i.qty} (${(i.price * i.qty).toLocaleString()} $)%0A`;
     });
-    msg += `%0ATotal : ${total.toLocaleString()} CDF`;
+    msg += `%0ATotal : ${total.toLocaleString()} $`;
     return msg;
   };
 
@@ -45,7 +45,7 @@ export default function Panier() {
                     <div>
                       <div style={{ fontWeight: 700, color: "var(--text-primary)" }}>{i.name}</div>
                       <div style={{ fontSize: 13, color: "var(--text-secondary)" }}>
-                        {Number(i.price).toLocaleString()} CDF / unité
+                        {Number(i.price).toLocaleString()} $ / unité
                       </div>
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -65,7 +65,7 @@ export default function Panier() {
               }}>
                 <span style={{ fontWeight: 800, fontSize: 18, color: "var(--text-primary)" }}>Total</span>
                 <span style={{ fontWeight: 900, fontSize: 20, color: "#f59e0b" }}>
-                  {total.toLocaleString()} CDF
+                  {total.toLocaleString()} $
                 </span>
               </div>
 

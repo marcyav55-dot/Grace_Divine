@@ -7,6 +7,7 @@ import SearchBar from "./SearchBar";
 
 const Navbar = () => {
   const [theme, setTheme] = React.useState('light');
+  const [searchOpen, setSearchOpen] = React.useState(false);
 
   const toggleTheme = () => {
     setTheme(prev => prev === 'dark' ? 'light' : 'dark');
@@ -23,7 +24,6 @@ const Navbar = () => {
   const itemCount = items.reduce((sum, i) => sum + i.qty, 0);
   const [scrolled, setScrolled] = React.useState(false);
   const [menuOpen, setMenuOpen] = React.useState(false);
-  const [searchOpen, setSearchOpen] = React.useState(false);
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -82,8 +82,8 @@ const Navbar = () => {
 
         <div className="nav-actions">
           <button
-            onClick={() => setSearchOpen(!searchOpen)}
-            className="theme-toggle"
+            onClick={() => setSearchOpen((v) => !v)}
+            className="search-toggle-btn"
             aria-label="Rechercher"
           >
             🔍
@@ -108,18 +108,8 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* ─── Barre de recherche déroulante ──────────────────────────────── */}
-      {searchOpen && (
-        <div style={{
-          background: "#fff", padding: "14px 1rem",
-          borderTop: "1px solid rgba(0,0,0,0.08)",
-          boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
-        }}>
-          <div style={{ maxWidth: 600, margin: "0 auto" }}>
-            <SearchBar onClose={() => setSearchOpen(false)} />
-          </div>
-        </div>
-      )}
+      {/* ─── Barre de recherche déroulante (services + boutique) ─────────── */}
+      {searchOpen && <SearchBar onClose={() => setSearchOpen(false)} />}
 
       {/* Menu mobile déroulant */}
       {menuOpen && (

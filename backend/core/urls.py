@@ -6,13 +6,14 @@ from django.conf.urls.static import static
 # Routage principal du projet Grâce Divine Multiservices
 urlpatterns = [
     # Administration Django
-    path('admin/', admin.site.urls),
+    path('marcus/', admin.site.urls),
     
     # Points d'entrée API par application
     path('api/auth/', include('apps.accounts.urls')),      # Authentification et profils
     path('api/services/', include('apps.services.urls')),  # Produits et services
     path('api/content/', include('apps.content.urls')),    # Blog, slides et contenus
     path('api/orders/', include('apps.orders.urls')),      # Commandes et paiements
+    path('api/contact/', include('apps.contact.urls')),      # Messages de contact
 ]
 
 # Sert les fichiers médias (images uploadées) en développement
