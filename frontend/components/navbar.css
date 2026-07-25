@@ -247,7 +247,7 @@
   padding: 0.5rem 0.75rem;
   cursor: pointer;
   font-size: 1.5rem;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
@@ -285,6 +285,36 @@
 
 /* === Responsive === */
 @media (max-width: 768px) {
+  .navbar-container {
+    flex-wrap: nowrap;
+    padding: 0 0.5rem;
+  }
+  .nav-brand-text p {
+    display: none;
+  }
+  .theme-toggle {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+    margin-right: 0.15rem;
+  }
+  .nav-actions {
+    gap: 0.25rem;
+  }
+  .cart-icon-link {
+    margin-right: 4px;
+    font-size: 1.15rem;
+  }
+  .nav-logo {
+    width: 34px;
+    height: 34px;
+  }
+  .nav-brand-text h1 {
+    font-size: 0.9rem;
+  }
+  .nav-brand-text h2 {
+    font-size: 0.6rem;
+  }
   .nav-links {
     display: none !important;
   }

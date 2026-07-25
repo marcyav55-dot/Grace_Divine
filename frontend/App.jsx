@@ -13,6 +13,7 @@ import Contact from "./pages/Contact";
 import Panier from "./pages/Panier";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Recherche from "./pages/Recherche";
 
 // ─── Composant racine de l'application ──────────────────────────────────────
 export default function App() {
@@ -64,6 +65,7 @@ export default function App() {
             {/* Authentification (facultative) */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/recherche" element={<Recherche />} />
           </Routes>
         </ErrorBoundary>
 

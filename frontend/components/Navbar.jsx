@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./navbar.css";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
+import SearchBar from "./SearchBar";
 
 const Navbar = () => {
   const [theme, setTheme] = React.useState('light');
@@ -22,6 +23,7 @@ const Navbar = () => {
   const itemCount = items.reduce((sum, i) => sum + i.qty, 0);
   const [scrolled, setScrolled] = React.useState(false);
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const [searchOpen, setSearchOpen] = React.useState(false);
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -79,6 +81,13 @@ const Navbar = () => {
         </ul>
 
         <div className="nav-actions">
+          <button
+            onClick={() => setSearchOpen(!searchOpen)}
+            className="theme-toggle"
+            aria-label="Rechercher"
+          >
+            🔍
+          </button>
           <Link to="/panier" className="cart-icon-link" aria-label="Panier" onClick={() => setMenuOpen(false)}>
             🛒
             {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}
@@ -98,6 +107,19 @@ const Navbar = () => {
           </button>
         </div>
       </div>
+
+      {/* ─── Barre de recherche déroulante ──────────────────────────────── */}
+      {searchOpen && (
+        <div style={{
+          background: "#fff", padding: "14px 1rem",
+          borderTop: "1px solid rgba(0,0,0,0.08)",
+          boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
+        }}>
+          <div style={{ maxWidth: 600, margin: "0 auto" }}>
+            <SearchBar onClose={() => setSearchOpen(false)} />
+          </div>
+        </div>
+      )}
 
       {/* Menu mobile déroulant */}
       {menuOpen && (

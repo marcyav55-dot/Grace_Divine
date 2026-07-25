@@ -96,3 +96,12 @@ export const authApi = {
     return !!localStorage.getItem('access_token');
   }
 };
+
+// Ajout de la méthode de recherche à l'objet api existant
+api.search = async function(query) {
+  return await this.get('/api/services/list/', { search: query });
+};
+
+api.search = async function(query) {
+  return await this.get('/api/services/list/', { search: query });
+};

@@ -9,28 +9,28 @@ export default function Hero() {
   // Index de la slide actuellement affichée
   const [current, setCurrent] = useState(0);
 
-  // true pendant la courte transition (fondu) entre deux slides
+  // true pendant la transition en fondu douce entre deux slides
   const [animating, setAnimating] = useState(false);
 
   // Référence vers le minuteur du défilement automatique
   const timerRef = useRef(null);
 
-  // Change de slide avec un petit effet de fondu (300ms)
+  // Change de slide avec un fondu doux (900ms, plus lent et fluide)
   const goTo = (idx) => {
     if (animating || idx === current) return;
     setAnimating(true);
     setTimeout(() => {
       setCurrent(idx);
-      setAnimating(false);
-    }, 300);
+      setTimeout(() => setAnimating(false), 50);
+    }, 900);
   };
 
   const next = () => goTo((current + 1) % SLIDES.length);
   const prev = () => goTo((current - 1 + SLIDES.length) % SLIDES.length);
 
-  // ─── Défilement automatique toutes les 5 secondes ──────────────────────
+  // ─── Défilement automatique toutes les 6.5 secondes (plus posé) ────────
   useEffect(() => {
-    timerRef.current = setInterval(next, 5000);
+    timerRef.current = setInterval(next, 6500);
     return () => clearInterval(timerRef.current);
   }, [current]);
 
@@ -44,19 +44,31 @@ export default function Hero() {
       overflow: "hidden",
       marginTop: 110, // espace pour la Navbar fixe en haut
     }}>
-      {/* ─── Image de fond de la slide actuelle ──────────────────────────── */}
+      {/* Animation de pulsation pour le bouton boutique */}
+      <style>{`
+        @keyframes pulseGlow {
+          0%   { box-shadow: 0 4px 20px rgba(29,78,216,0.4), 0 0 0 0 rgba(29,78,216,0.5); }
+          70%  { box-shadow: 0 4px 20px rgba(29,78,216,0.4), 0 0 0 12px rgba(29,78,216,0); }
+          100% { box-shadow: 0 4px 20px rgba(29,78,216,0.4), 0 0 0 0 rgba(29,78,216,0); }
+        }
+        .btn-boutique-pulse {
+          animation: pulseGlow 2.2s ease-out infinite;
+        }
+      `}</style>
+
+      {/* ─── Image de fond de la slide actuelle (fondu doux et lent) ───────── */}
       <div style={{
         position: "absolute", inset: 0,
         backgroundImage: `url(${slide.img})`,
         backgroundSize: "cover", backgroundPosition: "center",
         opacity: animating ? 0 : 1,
-        transition: "opacity 0.5s ease",
+        transition: "opacity 0.9s ease-in-out",
       }} />
 
       {/* Voile dégradé sombre pour que le texte blanc reste lisible */}
       <div style={{
         position: "absolute", inset: 0,
-        background: "linear-gradient(90deg, rgba(10,30,80,0.92) 0%, rgba(10,30,80,0.65) 60%, rgba(10,30,80,0.2) 100%)",
+        background: "linear-gradient(90deg, rgba(10,30,80,0.55) 0%, rgba(10,30,80,0.35) 60%, rgba(10,30,80,0.1) 100%)",
       }} />
 
       {/* ─── Contenu texte (titre, sous-titre, boutons) ──────────────────── */}
@@ -65,8 +77,8 @@ export default function Hero() {
         maxWidth: 1200, margin: "0 auto",
         padding: "60px 32px",
         opacity: animating ? 0 : 1,
-        transform: animating ? "translateX(-20px)" : "translateX(0)",
-        transition: "all 0.4s ease",
+        transform: animating ? "translateX(-14px)" : "translateX(0)",
+        transition: "all 0.9s ease-in-out",
       }}>
         {/* Badge "GRÂCE DIVINE" */}
         <div style={{
@@ -138,6 +150,23 @@ export default function Hero() {
             🔍 DÉCOUVRIR NOS SERVICES
           </button>
 
+          {/* Bouton "Voir la boutique" (animé, pulsation) -> redirige direct vers /boutique */}
+          <button
+            onClick={() => navigate("/boutique")}
+            className="btn-boutique-pulse"
+            style={{
+              background: "linear-gradient(135deg, #1d4ed8, #1e3a8a)",
+              color: "#fff", border: "none", cursor: "pointer",
+              padding: "14px 28px", borderRadius: 6,
+              fontWeight: 800, fontSize: 13, letterSpacing: 1,
+              transition: "transform 0.2s",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; }}
+          >
+            🛒 VOIR LA BOUTIQUE
+          </button>
+
           {/* Bouton "Nous contacter" -> ouvre WhatsApp (vert) */}
           <a
             href={`https://wa.me/${WHATSAPP_NUMBER}`}
@@ -206,7 +235,6 @@ export default function Hero() {
             key={i}
             onClick={() => goTo(i)}
             style={{
-              // Le point de la slide active est plus large (28px) et orange
               width: i === current ? 28 : 10,
               height: 10, borderRadius: 5,
               background: i === current ? "#f59e0b" : "rgba(255,255,255,0.4)",
