@@ -24,7 +24,7 @@ html { font-size: 100%; }
 
 body {
   margin: 0;
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
   line-height: 1.6;
   color: var(--text-primary);
   background: var(--bg-white);
@@ -256,4 +256,9 @@ a:hover { text-decoration: underline; }
 
 [data-theme="light"] .navbar {
   background: var(--navbar-bg-light);
+}
+
+/* Titres en Montserrat pour un rendu premium type agence web */
+h1, h2, h3, .nav-brand-text h1 {
+  font-family: "Montserrat", "Segoe UI", sans-serif;
 }

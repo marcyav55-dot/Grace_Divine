@@ -1,6 +1,6 @@
 export default function TrustSection() {
   const items = [
-    { icon: "⭐", title: "Clients satisfaits", desc: "★★★★★ Note moyenne de nos clients" },
+    { icon: "⭐", title: "Clients satisfaits", desc: "★★★★★  4.9/5 — Note moyenne de nos clients" },
     { icon: "⚡", title: "Intervention rapide", desc: "Réponse rapide à Kolwezi & Lubumbashi" },
     { icon: "📱", title: "Mobile Money", desc: "Paiement Mobile Money, cash ou virement" },
     { icon: "🕐", title: "Disponible 7j/7", desc: "Service disponible toute la semaine" },
@@ -33,8 +33,8 @@ export default function TrustSection() {
       <div className="trust-grid">
         {items.map((it, i) => (
           <div key={i} className="trust-card">
-            <div style={{ fontSize: 28, marginBottom: 10 }}>{it.icon}</div>
-            <div style={{ fontWeight: 800, fontSize: 14, color: "#0a1e50", marginBottom: 4 }}>
+            <div style={{ fontSize: 28, marginBottom: 10, color: "#c9a227" }}>{it.icon}</div>
+            <div style={{ fontWeight: 800, fontSize: 14, color: "#0a1628", marginBottom: 4 }}>
               {it.title}
             </div>
             <div style={{ fontSize: 12, color: "#64748b" }}>{it.desc}</div>

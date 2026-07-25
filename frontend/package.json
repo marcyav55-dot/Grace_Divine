@@ -12,6 +12,9 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/montserrat": "^5.3.0",
+    "@fontsource/playwrite-nz-guides": "^5.3.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "axios": "^1.18.1",

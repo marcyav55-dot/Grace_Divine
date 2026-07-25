@@ -26,12 +26,12 @@ const Footer = () => {
         </div>
         <div className="footer-col">
           <h4>Nos Services</h4>
-          <ul className="footer-links">
-            <li><Link to="/services">Forage de puits</Link></li>
-            <li><Link to="/services">Programmation</Link></li>
-            <li><Link to="/boutique?cat=forage">Boutique</Link></li>
-            <li><Link to="/a-propos">À Propos</Link></li>
-          </ul>
+            <ul className="footer-links">
+              <li><Link to="/services">Forage d'Eau</Link></li>
+              <li><Link to="/services">Maintenance Informatique</Link></li>
+              <li><Link to="/services">Réseaux & Télécommunications</Link></li>
+              <li><Link to="/services">Bureautique & Assistance Académique</Link></li>
+            </ul>
         </div>
         <div className="footer-col">
           <h4>Contact</h4>

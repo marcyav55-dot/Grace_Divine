@@ -62,7 +62,7 @@ export default function ServicesPremium() {
         }
         .svp-btn {
           display: inline-flex; align-items: center; gap: 6px;
-          background: linear-gradient(135deg, #f59e0b, #d97706);
+          background: linear-gradient(135deg, #c9a227, #a8841f);
           color: #fff; border: none; border-radius: 999px;
           padding: 8px 18px; font-size: 12px; font-weight: 800;
           letter-spacing: 0.3px; cursor: pointer;
@@ -80,7 +80,7 @@ export default function ServicesPremium() {
       <div style={{ textAlign: "center", marginBottom: 44 }}>
         <span style={{
           display: "inline-block",
-          background: "#eff6ff", color: "#1d4ed8",
+          background: "#eff6ff", color: "#0a1628",
           fontSize: 12, fontWeight: 700, letterSpacing: 2,
           padding: "4px 16px", borderRadius: 20, marginBottom: 16,
           textTransform: "uppercase",
@@ -96,7 +96,7 @@ export default function ServicesPremium() {
         </h2>
         <div style={{
           width: 50, height: 4,
-          background: "linear-gradient(90deg, #1d4ed8, #f59e0b)",
+          background: "linear-gradient(90deg, #0a1628, #c9a227)",
           borderRadius: 2, margin: "0 auto",
         }} />
       </div>

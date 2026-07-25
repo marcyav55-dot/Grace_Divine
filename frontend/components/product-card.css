@@ -1,6 +1,6 @@
 /* ──────────────────────────────────────────────────────────────────────────
    ProductCard — carte produit premium façon Amazon / Jumia / Decathlon
-   Couleurs de la marque : bleu (#1d4ed8 / #0a1e50) et or (#f59e0b)
+   Couleurs de la marque : bleu (#1d4ed8 / #0a1e50) et or (#c9a227)
    ────────────────────────────────────────────────────────────────────────── */
 
 .product-card {
@@ -62,7 +62,7 @@
 
 .product-badge.badge-new     { background: linear-gradient(135deg, #1d4ed8, #0a1e50); }
 .product-badge.badge-popular { background: linear-gradient(135deg, #f97316, #ea580c); }
-.product-badge.badge-topsale { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.product-badge.badge-topsale { background: linear-gradient(135deg, #c9a227, #d97706); }
 .product-badge.badge-promo   { background: linear-gradient(135deg, #dc2626, #b91c1c); }
 
 /* === Icône favoris === */
@@ -123,7 +123,7 @@
 }
 
 .product-stars {
-  color: #f59e0b;
+  color: #c9a227;
   font-size: 13px;
   letter-spacing: 1px;
 }
@@ -288,7 +288,7 @@
 
 .product-gallery-dot.is-active {
   width: 18px;
-  background: #f59e0b;
+  background: #c9a227;
 }
 
 /* === Responsive : cartes légèrement plus compactes sur mobile === */

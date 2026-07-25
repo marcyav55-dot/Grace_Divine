@@ -4,16 +4,16 @@
 
 /* === Variables de thème === */
 :root {
-  --navbar-bg-dark: rgba(10,30,80,0.85);
-  --navbar-bg-dark-scroll: rgba(10,30,80,0.97);
+  --navbar-bg-dark: rgba(10,22,40,0.85);
+  --navbar-bg-dark-scroll: rgba(10,22,40,0.97);
   --navbar-bg-light: rgba(235,245,255,0.85);
   --navbar-bg-light-scroll: rgba(235,245,255,0.97);
   --text-primary-dark: #fff;
   --text-primary-light: #1a202c;
   --text-secondary-dark: #cbd5e1;
   --text-secondary-light: #4a5568;
-  --accent-orange: #f59e0b;
-  --accent-orange-hover: #d97706;
+  --accent-orange: #c9a227;
+  --accent-orange-hover: #a8841f;
   --border-light-dark: rgba(255,255,255,0.08);
   --border-light-light: rgba(0,0,0,0.08);
 }
@@ -53,7 +53,7 @@
 
 /* Quand on a scrollé, la barre devient plus opaque */
 .navbar.scrolled {
-  background: rgba(10,30,80,0.97);
+  background: rgba(10,22,40,0.97);
   box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
 
@@ -68,7 +68,7 @@
 
 /* === Barre du haut (téléphone / WhatsApp) === */
 .navbar-top {
-  background: #0a1e50;
+  background: #0a1628;
   border-bottom: 1px solid rgba(255,255,255,0.08);
   padding: 0.5rem 1rem;
   display: flex;
@@ -78,7 +78,7 @@
 }
 
 .navbar-top a {
-  color: #f59e0b;
+  color: #c9a227;
   text-decoration: none;
   font-size: 0.875rem;
   font-weight: 600;
@@ -113,7 +113,7 @@
 .nav-brand-text h2 {
   margin: 0;
   font-size: 0.75rem;
-  color: #f59e0b;
+  color: #c9a227;
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -153,9 +153,9 @@
 }
 
 .nav-link.active {
-  color: #f59e0b;
+  color: #c9a227;
   font-weight: 700;
-  border-bottom-color: #f59e0b;
+  border-bottom-color: #c9a227;
 }
 
 /* === Bouton thème et menu mobile === */
@@ -255,7 +255,7 @@
 
 /* === Menu déroulant mobile === */
 .mobile-menu {
-  background: #0a1e50;
+  background: #0a1628;
   padding: 1rem 1.5rem 1.5rem;
   display: flex;
   flex-direction: column;
@@ -275,11 +275,11 @@
 
 .mobile-menu a:hover,
 .mobile-menu a:focus {
-  color: #f59e0b;
+  color: #c9a227;
 }
 
 .mobile-menu a.active {
-  color: #f59e0b;
+  color: #c9a227;
   font-weight: 600;
 }
 
@@ -402,7 +402,7 @@
 .nav-cta-btn {
   display: inline-flex;
   align-items: center;
-  background: linear-gradient(135deg, #f59e0b, #d97706);
+  background: linear-gradient(135deg, #c9a227, #a8841f);
   color: #fff !important;
   text-decoration: none;
   font-size: 0.8rem;
@@ -461,7 +461,7 @@
 
 /* === Barre de recherche déroulante === */
 .nav-search-bar {
-  background: #0a1e50;
+  background: #0a1628;
   border-top: 1px solid rgba(255,255,255,0.08);
   padding: 1rem 1.5rem;
   animation: searchSlideDown 0.25s ease;

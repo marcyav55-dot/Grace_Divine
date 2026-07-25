@@ -1,0 +1,102 @@
+.shop-preview-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px 40px;
+}
+
+.shop-preview-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.shop-preview-title {
+  text-transform: uppercase;
+  text-transform: uppercase;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 900;
+  color: #0a1628;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 12px;
+}
+
+.shop-preview-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #c9a227, #e8c766);
+}
+
+.shop-preview-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.shop-preview-chip {
+  border: 2px solid #e2e8f0;
+  background: #fff;
+  color: #0a1628;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.shop-preview-chip:hover {
+  border-color: #c9a227;
+}
+
+.shop-preview-chip.is-active {
+  background: #c9a227;
+  border-color: #c9a227;
+  color: #fff;
+}
+
+.shop-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.shop-preview-cta-wrap {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.shop-preview-cta {
+  background: linear-gradient(135deg, #0a1628, #16274a);
+  color: #fff;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(10,22,40,0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.shop-preview-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(10,22,40,0.35);
+}
+
+@media (max-width: 1024px) {
+  .shop-preview-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .shop-preview-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .shop-preview-section { padding: 40px 16px 30px; }
+}

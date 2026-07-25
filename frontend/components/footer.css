@@ -3,9 +3,9 @@
    ────────────────────────────────────────────────────────────────────────────── */
 
 :root {
-  --primary-dark: #0a1e50;
-  --primary-blue: #1d4ed8;
-  --accent-orange: #f59e0b;
+  --primary-dark: #0a1628;
+  --primary-blue: #0a1628;
+  --accent-orange: #c9a227;
   --text-primary: #0f172a;
   --text-secondary: #475569;
   --text-light: #94a3b8;
@@ -15,7 +15,7 @@
 
 /* === Footer global (couleur adoucie en dégradé) === */
 .footer {
-  background: linear-gradient(160deg, #0d2461 0%, #0a1e50 60%, #081a45 100%);
+  background: linear-gradient(160deg, #16274a 0%, #0a1628 60%, #060f1e 100%);
   color: #fff;
   padding: 2.75rem 1rem 1.5rem;
   position: relative;
@@ -48,7 +48,7 @@
 .logo-circle {
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, var(--accent-orange), #d97706);
+  background: linear-gradient(135deg, var(--accent-orange), #a8841f);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -227,6 +227,6 @@
   position: absolute;
   left: 0; bottom: 0;
   width: 28px; height: 2px;
-  background: linear-gradient(90deg, #f59e0b, #fcd34d);
+  background: linear-gradient(90deg, #c9a227, #e8c766);
   border-radius: 2px;
 }

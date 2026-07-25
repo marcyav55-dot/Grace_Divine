@@ -10,7 +10,7 @@ export function StatsStrip() {
   ];
   return (
     <div style={{
-      background: "linear-gradient(135deg, #0a1e50, #1d4ed8)",
+      background: "linear-gradient(135deg, #0a1628, #0a1628)",
       padding: "44px 24px",
     }}>
       <style>{`
@@ -47,7 +47,7 @@ export function StatsStrip() {
         {stats.map((s, i) => (
           <div key={i} className="stats-card">
             <div style={{ fontSize: 26, marginBottom: 8 }}>{s.icon}</div>
-            <div style={{ fontSize: 30, fontWeight: 900, color: "#f59e0b", lineHeight: 1 }}>
+            <div style={{ fontSize: 30, fontWeight: 900, color: "#c9a227", lineHeight: 1 }}>
               {s.value}
             </div>
             <div style={{ color: "#cbd5e1", fontSize: 12.5, marginTop: 6 }}>{s.label}</div>
@@ -62,7 +62,7 @@ export function StatsStrip() {
 export function CTABanner() {
   return (
     <section style={{
-      background: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
+      background: "linear-gradient(135deg, #c9a227 0%, #a8841f 100%)",
       padding: "60px 24px",
       textAlign: "center",
     }}>
