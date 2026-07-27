@@ -1,0 +1,232 @@
+/* ──────────────────────────────────────────────────────────────────────────────
+   Styles pour le Footer
+   ────────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --primary-dark: #0a1628;
+  --primary-blue: #0a1628;
+  --accent-orange: #c9a227;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-light: #94a3b8;
+  --bg-white: #ffffff;
+  --bg-light: #f8fafc;
+}
+
+/* === Footer global (couleur adoucie en dégradé) === */
+.footer {
+  background: linear-gradient(160deg, #16274a 0%, #0a1628 60%, #060f1e 100%);
+  color: #fff;
+  padding: 2.75rem 1rem 1.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+/* === Grille principale (espacement réduit) === */
+.footer-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.logo-circle {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--accent-orange), #a8841f);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  color: #fff;
+  font-size: 1.125rem;
+}
+
+.logo-text h4 {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.logo-text p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--accent-orange);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.footer-desc {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.footer-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: var(--accent-orange);
+  transform: translateX(4px);
+}
+
+.footer-links a:hover::before {
+  content: "→";
+  margin-right: 4px;
+}
+
+.footer-contact {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.footer-contact li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.footer-contact li span {
+  font-size: 1.1rem;
+}
+
+.footer-col h4 {
+  margin: 0 0 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 1.1rem;
+  text-align: center;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.75rem;
+}
+
+.social-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.social-icon:hover {
+  background: var(--accent-orange);
+}
+
+/* === Responsive : espacement resserré sur mobile === */
+@media (max-width: 768px) {
+  .footer {
+    padding: 2rem 1rem 1.25rem;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .footer-col {
+    gap: 0.5rem;
+  }
+  .footer-logo {
+    justify-content: center;
+  }
+  .footer-desc {
+    text-align: center;
+  }
+  .footer-contact li {
+    justify-content: center;
+  }
+  .social-links {
+    justify-content: center;
+    display: flex;
+    gap: 0.5rem;
+  }
+}
+
+.footer-logo-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* === Touche premium finale === */
+.footer {
+  border-top: 2px solid rgba(245,158,11,0.35);
+}
+
+.social-icon {
+  transition: transform 0.25s ease, background 0.25s ease !important;
+}
+
+.social-icon:hover {
+  transform: translateY(-3px);
+}
+
+.footer-col h4 {
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.footer-col h4::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 28px; height: 2px;
+  background: linear-gradient(90deg, #c9a227, #e8c766);
+  border-radius: 2px;
+}

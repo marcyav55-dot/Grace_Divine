@@ -1,0 +1,16 @@
+import Hero from "../components/Hero";
+import TrustSection from "../components/TrustSection";
+import ServiceCarousel from "../components/ServiceCarousel";
+import { StatsStrip, CTABanner } from "../components/StatsAndCTA";
+
+export default function Accueil() {
+  return (
+    <>
+      <Hero />
+      <TrustSection />
+      <ServiceCarousel />
+      <StatsStrip />
+      <CTABanner />
+    </>
+  );
+}

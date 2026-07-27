@@ -1,0 +1,264 @@
+/* ──────────────────────────────────────────────────────────────────────────────
+   Design System – Inspiré par E-lycee (elycee-pro.vercel.app)
+   Couleurs, typographie et composants modernes pour une expérience premium
+   ────────────────────────────────────────────────────────────────────────────── */
+
+/* === Palette de couleurs === */
+:root {
+  --primary-dark: #0a1e50;    /* Bleu nuit profond */
+  --primary-blue: #1d4ed8;    /* Bleu principal */
+  --accent-orange: #f59e0b;   /* Orange vif pour les actions */
+  --accent-green: #10b981;     /* Vert pour les secondaires */
+  --text-primary: #0f172a;    /* Texte foncé */
+  --text-secondary: #475569;  /* Gris moyen */
+  --text-light: #94a3b8;      /* Gris clair */
+  --bg-white: #ffffff;        /* Fond blanc */
+  --bg-light: #f8fafc;        /* Gris très clair */
+  --bg-gradient: linear-gradient(135deg, var(--primary-dark), var(--primary-blue));
+}
+
+/* === Typographie === */
+* { box-sizing: border-box; }
+
+html { font-size: 100%; }
+
+body {
+  margin: 0;
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--bg-white);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 0.75rem;
+  font-weight: 900;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+
+h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+
+p { margin: 0 0 1rem; color: var(--text-secondary); }
+
+a { color: var(--primary-blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* === Boutons === */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.btn-primary {
+  background: var(--accent-orange);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #e08a00;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: var(--accent-green);
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background: #059669;
+  transform: translateY(-2px);
+}
+
+/* === Cartes (cards) === */
+.card {
+  background: var(--bg-white);
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px -2px rgba(0,0,0,0.15);
+}
+
+/* === Sections et conteneurs === */
+.section {
+  padding: 4rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-header h2 {
+  margin-bottom: 0.5rem;
+}
+
+.section-header p {
+  font-size: 1.125rem;
+  color: var(--text-light);
+}
+
+/* === Bandeau de titre (Hero) === */
+.hero {
+  background: var(--bg-gradient);
+  color: #fff;
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.hero h1 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  color: rgba(255,255,255,0.8);
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+}
+
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.nav-logo {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--primary-dark);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--primary-blue);
+}
+
+/* === Badges et tags === */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.badge-primary {
+  background: #eff6ff;
+  color: var(--primary-blue);
+}
+
+/* === Utilities === */
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .section { padding: 3rem 1rem; }
+  .nav-links { display: none; }
+}
+
+
+
+
+/* === Thèmes (via data-theme sur <html>) === */
+
+/* Clair : identité actuelle, légèrement réchauffée */
+[data-theme="light"] {
+  --bg-white: #fdfdfc;
+  --bg-light: #f4f6fb;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+}
+
+/* Sombre : bleu nuit profond, surfaces dégradées, accents dorés */
+[data-theme="dark"] {
+  --primary-dark: #12296e;
+  --bg-white: #12296e;
+  --bg-light: #17347d;
+  --text-primary: #f8fafc;
+  --text-secondary: #b8c4e0;
+  --text-light: #7d8db8;
+  --bg-gradient: linear-gradient(135deg, #061436, #12296e);
+}
+
+[data-theme="dark"] body {
+  background: var(--bg-white);
+}
+
+[data-theme="dark"] .card {
+  background: linear-gradient(160deg, #17347d, #12296e);
+  border-color: rgba(245, 158, 11, 0.25);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+[data-theme="dark"] .card:hover {
+  border-color: rgba(245, 158, 11, 0.5);
+}
+
+[data-theme="dark"] .btn-primary {
+  box-shadow: 0 0 0 1px rgba(245,158,11,0.4), 0 4px 14px rgba(245,158,11,0.25);
+}
+
+[data-theme="dark"] .badge-primary {
+  background: rgba(29, 78, 216, 0.25);
+  color: #93c5fd;
+}
+
+/* Navbar : suit le thème */
+[data-theme="dark"] .navbar {
+  background: var(--navbar-bg-dark);
+}
+
+[data-theme="light"] .navbar {
+  background: var(--navbar-bg-light);
+}
+
+/* Titres en Montserrat pour un rendu premium type agence web */
+h1, h2, h3, .nav-brand-text h1 {
+  font-family: "Montserrat", "Segoe UI", sans-serif;
+}
