@@ -2,9 +2,14 @@ django
 djangorestframework
 djangorestframework-simplejwt
 django-cors-headers
-psycopg[binary]
-pillow
-python-dotenv
 django-filter
 
 dj-database-url
+python-dotenv
+
+psycopg[binary]
+
+pillow
+
+gunicorn
+whitenoise
