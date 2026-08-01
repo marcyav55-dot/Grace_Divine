@@ -11,6 +11,18 @@ export const NAV_LINKS = [
 
 export const SLIDES = [
   {
+    title: "SOLUTIONS NUMÉRIQUES",
+    subtitle: "VOTRE PARTENAIRE TECH AU QUOTIDIEN",
+    desc: "Sites web, logiciels, réseaux et matériel informatique pour particuliers et entreprises.",
+    img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=80",
+  },
+  {
+    title: "IMPRESSION DE MÉMOIRES",
+    subtitle: "OFFRE SPÉCIALE FINALISTES DE L'UNIKOL",
+    desc: "Impression, reliure et mise en forme de votre mémoire de fin d'études, avec qualité et rapidité.",
+    img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=900&q=80",
+  },
+  {
     title: "BIENVENUE",
     subtitle: "DES SOLUTIONS COMPLÈTES POUR UN AVENIR MEILLEUR",
     desc: "Nous offrons des services professionnels dans plusieurs domaines pour les particuliers, entreprises et communautés.",
@@ -228,5 +240,35 @@ export const SERVICES_PREMIUM = [
     cta: "Voir la boutique",
     link: "/boutique",
     img: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=800&q=80",
+  },
+  {
+    id: 7,
+    icon: "🎓",
+    title: "Impression de Mémoires",
+    slug: "impression-memoires",
+    desc: "Impression, reliure et mise en forme de mémoires de fin d'études pour les finalistes de l'UNIKOL et d'ailleurs.",
+    cta: "Découvrir",
+    link: "/contact",
+    img: "https://images.unsplash.com/photo-1568667256549-094345857637?w=800&q=80",
+  },
+  {
+    id: 8,
+    icon: "📖",
+    title: "Assistance Travaux Scientifiques",
+    slug: "assistance-scientifique",
+    desc: "Rédaction, correction et mise en page de mémoires, TFC et rapports de stage pour étudiants et chercheurs.",
+    cta: "Découvrir",
+    link: "/contact",
+    img: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80",
+  },
+  {
+    id: 9,
+    icon: "📶",
+    title: "Zone WiFi du Campus",
+    slug: "wifi-campus",
+    desc: "Connexion internet illimitée et sécurisée pour les étudiants, à la demi-journée, journée ou semaine.",
+    cta: "Découvrir",
+    link: "/contact",
+    img: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80",
   },
 ];

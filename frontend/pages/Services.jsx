@@ -1,5 +1,10 @@
 import { useParams } from "react-router-dom";
 import { api } from "../services/api"; // Import du service API
+
+function resolveImg(path) {
+  if (!path) return null;
+  return path.startsWith("http") ? path : `${api.baseUrl}${path}`;
+}
 import ServiceCard from "../components/ServiceCard";
 import { CTABanner } from "../components/StatsAndCTA";
 import { useState, useEffect } from "react";
@@ -13,6 +18,13 @@ import { useState, useEffect } from "react";
 
 // Transforme un objet service brut de l'API vers la forme attendue par <ServiceCard />
 function mapToCard(s) {
+  const iconMap = {
+    web: "🌐", forage: "💧", informatique: "💻", habillement: "👕",
+    "impression-memoires": "🎓", "assistance-scientifique": "📖", "wifi-campus": "📶",
+  };
+  const colorMap2 = {
+    web: "blue", forage: "cyan", informatique: "amber", habillement: "amber",
+  };
   return {
     id: s.id,
     title: s.name,
@@ -20,8 +32,10 @@ function mapToCard(s) {
     items: s.description ? [s.description] : [],
     cta: s.is_service === false ? "VOIR LA BOUTIQUE" : "EN SAVOIR PLUS",
     slug: s.category?.slug || s.id,
-    icon: s.category?.slug === "web" ? "🌐" : s.category?.slug === "forage" ? "💧" : "🔧",
-    color: s.category?.slug === "web" ? "blue" : s.category?.slug === "forage" ? "cyan" : "amber",
+    icon: iconMap[s.category?.slug] || "🔧",
+    color: colorMap2[s.category?.slug] || "amber",
+    img: resolveImg(s.image),
+    isProduct: s.is_service === false,
   };
 }
 
@@ -96,7 +110,7 @@ export default function Services() {
               gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
               gap: 24,
             }}>
-              {services.map(s => <ServiceCard key={s.id} service={s} />)}
+              {services.filter(s => !s.isProduct).map(s => <ServiceCard key={s.id} service={s} />)}
             </div>
           )}
         </div>
